@@ -30,7 +30,12 @@ https://templatemo.com/tm-570-chain-app-dev
     <link rel="stylesheet" href="{% static 'assets/css/templatemo-chain-app-dev.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/animated.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/owl.css' %}">
-
+    <link rel="stylesheet" href="{% static 'assets/css/custom.css' %}">
+    
+    {% block style %}
+      
+    {% endblock style %}
+      
   </head>
 
 <body>
@@ -49,38 +54,36 @@ https://templatemo.com/tm-570-chain-app-dev
   <!-- ***** Preloader End ***** -->
 
   <!-- ***** Header Area Start ***** -->
-  <header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <nav class="main-nav">
-            <!-- ***** Logo Start ***** -->
-            <a href="index.html" class="logo">
-              <img src="{% static 'assets/images/logo.png' %}" alt="Chain App Dev">
-            </a>
-            <!-- ***** Logo End ***** -->
-            <!-- ***** Menu Start ***** -->
-            <ul class="nav">
-              <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
-              <li class="scroll-to-section"><a href="#services">Services</a></li>
-              <li class="scroll-to-section"><a href="#about">About</a></li>
-              <li class="scroll-to-section"><a href="#pricing">Pricing</a></li>
-              <li class="scroll-to-section"><a href="#newsletter">Newsletter</a></li>
-              <li><div class="gradient-button"><a id="modal_trigger" href="#modal"><i class="fa fa-sign-in-alt"></i> Sign In Now</a></div></li> 
-            </ul>        
-            <a class='menu-trigger'>
-                <span>Menu</span>
-            </a>
-            <!-- ***** Menu End ***** -->
-          </nav>
-        </div>
+  
+  {% block header %}
+    {% include 'components/landing_header.html' %}
+  {% endblock header %}
+    
+  <!-- ***** Header Area End ***** -->
+
+  {% comment %} for auth modal {% endcomment %}
+  {% include 'components/auth_modals.html' %}
+
+  
+  {% if messages %}
+    
+    {% for message in messages %}
+    <div class="custom-alert alert alert-info alert-dismissible fade show" role="alert">
+      <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>
+      <div>
+      {{message}}
       </div>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-  </header>
+    
+    {% endfor %}
+      
+  {% endif %}
+    
+
 {% block landingPage %}
 
-{%endblock%}
-  <!-- ***** Header Area End ***** -->
+{% endblock %}
  
   
 

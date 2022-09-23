@@ -141,9 +141,12 @@ $(function() {
   });
 
   function onScroll(event){
+    
       var scrollPos = $(document).scrollTop();
       $('.nav a').each(function () {
           var currLink = $(this);
+         
+          if(location.pathname !== '/') return
           var refElement = $(currLink.attr("href"));
           if (refElement.position().top <= scrollPos && refElement.position().top + refElement.height() > scrollPos) {
               $('.nav ul li a').removeClass("active");
