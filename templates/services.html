@@ -1,0 +1,104 @@
+{% extends 'index.html' %}
+{% load static%}
+
+{% block header %}
+{% include 'components/header.html' with active='dashboard' %}
+{% endblock header %}    
+
+{% block landingPage %}
+
+    <div id="about" class="about-us section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>{{user.get_full_name}} Dashboard</h1>
+                  </div>
+                  <h1>Services</h1>
+            </div>
+            <div class="row">
+                    <div class="col-lg-4">
+                        <div class="box-item">
+                            <h4><a href="#">Motor vehicle Licences</a></h4>
+                            <p>Lorem Ipsum Text</p>
+                        </div>
+                    </div>
+                        <div class="col-lg-4">
+                            <div class="box-item">
+                                <h4><a href="#">Driver's Licences</a></h4>
+                                <p>Lorem Ipsum Text</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="box-item">
+                                <h4><a href="#">Private School Fees</a></h4>
+                                <p>Lorem Ipsum Text</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="box-item">
+                                <h4><a href="#">Store Keeper</a></h4>
+                                <p>Lorem Ipsum Text</p>
+                            </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="box-item">
+                                    <h4><a href="#">Marriage/Divorce fees</a></h4>
+                                    <p>Lorem Ipsum Text</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="box-item">
+                                    <h4><a href="#">Inspection Fees</a></h4>
+                                    <p>Lorem Ipsum Text</p>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="row">
+                    <div class="col-lg-4">
+                        <div class="box-item">
+                            <h4><a href="#">Marriage/Divorce fees</a></h4>
+                            <p>Lorem Ipsum Text</p>
+                        </div>
+                        </div>
+                        <div class="col-lg-4">
+                        <div class="box-item">
+                            <h4><a href="#">Inspection Fees</a></h4>
+                            <p>Lorem Ipsum Text</p>
+                        </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="box-item">
+                                <h4><a href="#">Marriage/Divorce fees</a></h4>
+                                <p>Lorem Ipsum Text</p>
+                            </div>
+                            </div>
+                            <div class="col-lg-4">
+                            <div class="box-item">
+                                <h4><a href="#">Inspection Fees</a></h4>
+                                <p>Lorem Ipsum Text</p>
+                            </div>
+                            </div>
+                        <div class="col-lg-4">
+                        <div class="box-item">
+                            <h4><a href="#">Application Fees</a></h4>
+                            <p>Lorem Ipsum Text</p>
+                        </div>
+                        </div>
+                        <div class="col-lg-4">
+                        <div class="box-item">
+                            <h4><a href="#">School Tuition/Rgistration/Examination fees</a></h4>
+                            <p>Lorem Ipsum Text</p>
+                        </div>
+                        </div>
+            </div>
+            </div>
+            <div class="col-lg-4">
+            <div class="right-image">
+                <img src="{% static 'assets/images/about-right-dec.png' %}" alt="">
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+{% endblock %}

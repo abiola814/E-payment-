@@ -12,3 +12,6 @@ def terms_and_condition(request):
 
 def dashboard(request):
     return render(request, 'dashboard.html')
+
+def services(request):
+    return render(request, 'services.html')

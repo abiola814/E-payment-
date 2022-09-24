@@ -4,15 +4,19 @@
 
 {% block landingPage%}
 
-  <div class="main-banner wow fadeIn" id="top" data-wow-duration="1s" data-wow-delay="0.5s">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="row">
-            <div class="col-lg-6 align-self-center">
-              <div class="left-content show-up header-text wow fadeInLeft" data-wow-duration="1s" data-wow-delay="1s">
-                <div class="row">
-                  <div class="col-lg-12">
+<div class="main-banner wow fadeIn" id="top" data-wow-duration="1s" data-wow-delay="0.5s">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="row">
+          <div class="col-lg-6 align-self-center">
+            <div class="left-content show-up header-text wow fadeInLeft" data-wow-duration="1s" data-wow-delay="1s">
+              <div class="row">
+                <div class="col-lg-12">
+                    <form class="d-flex" role="search">
+                      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                      <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
                     <h2>Pay Your Levies with Ease</h2>
                     <p>Chain App Dev is an app landing page HTML5 template based on Bootstrap v5.1.3 CSS layout provided by TemplateMo, a great website to download free CSS templates.</p>
                   </div>
@@ -58,7 +62,7 @@
             <h4>Fees</h4>
             <p>You are not allowed to redistribute this template ZIP file on any other website.</p>
             <div class="text-button">
-              <a href="#">Read More <i class="fa fa-arrow-right"></i></a>
+              <a href="{% url 'services' %}">Read More <i class="fa fa-arrow-right"></i></a>
             </div>
           </div>
         </div>
@@ -68,7 +72,7 @@
             <h4>Fines</h4>
             <p>You are allowed to use the Chain App Dev HTML template. Feel free to modify or edit this layout.</p>
             <div class="text-button">
-              <a href="#">Read More <i class="fa fa-arrow-right"></i></a>
+              <a href="{% url 'services' %}">Read More <i class="fa fa-arrow-right"></i></a>
             </div>
           </div>
         </div>
@@ -78,7 +82,7 @@
             <h4>Sales</h4>
             <p>If this template is beneficial for your work, please support us <a rel="nofollow" href="https://paypal.me/templatemo" target="_blank">a little via PayPal</a>. Thank you.</p>
             <div class="text-button">
-              <a href="#">Read More <i class="fa fa-arrow-right"></i></a>
+              <a href="{% url 'services' %}">Read More <i class="fa fa-arrow-right"></i></a>
             </div>
           </div>
         </div>
@@ -88,7 +92,7 @@
             <h4>Earnings</h4>
             <p>Lorem ipsum dolor consectetur adipiscing elit sedder williamsburg photo booth quinoa and fashion axe.</p>
             <div class="text-button">
-              <a href="#">Read More <i class="fa fa-arrow-right"></i></a>
+              <a href="{% url 'services' %}">Read More <i class="fa fa-arrow-right"></i></a>
             </div>
           </div>
         </div>
@@ -147,7 +151,7 @@
     </div>
   </div>
 
-  <div id="clients" class="the-clients">
+  <!-- <div id="clients" class="the-clients">
     <div class="container">
       <div class="row">
         <div class="col-lg-8 offset-lg-2">
@@ -463,7 +467,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
 </div> 
 {%endblock%}
