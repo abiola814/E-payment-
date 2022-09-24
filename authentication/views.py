@@ -1,9 +1,9 @@
+from logging import exception
 from django.shortcuts import render, redirect
 from .models import User
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth import logout as user_logout, login as user_login
-from django.contrib.messages import add_message
-from django.contrib.messages import constants
+from django.contrib.messages import add_message ,constants
 # Create your views here.
 
 def set_username(email: str, first_name: str):
@@ -30,7 +30,13 @@ def login(request):
 def register(request):
     if request.method == 'POST':
         full_name = request.POST.get('full_name')
-        first_name, last_name = full_name.split(' ')
+
+        try:
+            first_name, last_name = full_name.split(' ')
+        except ValueError:
+            add_message(request, constants.ERROR, 'please input your full name with space ')
+            return redirect('home')
+
         email = request.POST.get('email')
         password = request.POST.get('password')
         if User.objects.filter(email = email).exists():
