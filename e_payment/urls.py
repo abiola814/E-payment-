@@ -22,9 +22,9 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('services/', views.services, name='services'),
+    path('connect/', views.connect, name='connector'),
     path('terms_and_condition/', views.terms_and_condition, name='terms'),
     path('authentication/', include('authentication.urls')),
-path('activate/<uidb64>/<token>',activate, name='activate'),
+    path('activate/<uidb64>/<token>',activate, name='activate'),
     path('', views.home, name='home'),
-    
 ]
