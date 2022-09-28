@@ -16,6 +16,14 @@ from .generator import unique_key_generator
 # Create your views here.
 
 def activate(request, uidb64, token):
+    """
+    Get request.
+    activation of your account
+    :param request:
+    :param user uid:
+    :param token generated
+    :return: route
+    """
 
     try:
         uid = force_str(urlsafe_base64_decode(uidb64))
@@ -37,6 +45,16 @@ def activate(request, uidb64, token):
     return redirect('home')
 
 def passwordEmail(request, user, to_email,password):
+
+    """
+    Get request.
+    send email to user for password
+    :param request:
+    :param User object:
+    :param email
+    :param password
+    :return: mail
+    """
     mail_subject = "password for account."
     message = render_to_string("welcome.html", {
         'user': user.username,
@@ -52,6 +70,15 @@ def passwordEmail(request, user, to_email,password):
     else:
         print('did not send')
 def activateEmail(request, user, to_email):
+
+    """
+    Get request.
+    send email to user for activation
+    :param request:
+    :param User object:
+    :param email
+    :return: mail
+    """
     mail_subject = "Activate your user account."
     message = render_to_string("activate_account.html", {
         'user': user.username,
@@ -91,6 +118,12 @@ def login(request):
     return redirect('home')
 
 def register(request):
+    """
+    Post request.
+    :param request:
+    :param full name:
+    :return: route
+    """
     if request.method == 'POST':
         full_name = request.POST.get('full_name')
 
