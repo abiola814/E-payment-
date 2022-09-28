@@ -11,6 +11,8 @@ from django.utils.encoding import force_bytes, force_str
 from django.core.mail import EmailMessage
 from .email_token import account_activation_token
 from django.conf import settings
+from .generator import unique_key_generator
+
 # Create your views here.
 
 def activate(request, uidb64, token):
@@ -22,16 +24,33 @@ def activate(request, uidb64, token):
         user = None
 
     if user is not None and account_activation_token.check_token(user, token):
+        password=unique_key_generator(User)
+        user.set_password(password)
         user.is_active = True
         user.save()
-
-        add_message(request,constants.SUCCESS, "Thank you for your email confirmation. Now you can login your account.")
+        passwordEmail(request, user,user.email,password)
+        add_message(request,constants.SUCCESS, "Thank you for your email confirmation. check your password and login to your account .")
         return redirect('home')
     else:
         add_message(request,constants.ERROR, "Activation link is invalid!")
 
     return redirect('home')
 
+def passwordEmail(request, user, to_email,password):
+    mail_subject = "password for account."
+    message = render_to_string("welcome.html", {
+        'user': user.username,
+        'domain': get_current_site(request).domain,
+        "protocol": 'https' if request.is_secure() else 'http',
+        'password':password
+    })
+    print(user.username)
+    print(to_email)
+    email = EmailMessage(subject=mail_subject, body=message,from_email=settings.EMAIL_FROM_USER, to=[to_email])
+    if email.send(fail_silently = False):
+        pass
+    else:
+        print('did not send')
 def activateEmail(request, user, to_email):
     mail_subject = "Activate your user account."
     message = render_to_string("activate_account.html", {
@@ -82,12 +101,11 @@ def register(request):
             return redirect('home')
 
         email = request.POST.get('email')
-        password = request.POST.get('password')
         if User.objects.filter(email = email).exists():
             add_message(request, constants.ERROR, 'Email already in use')
             return redirect('home')
         else:
-            u = User.objects.create_user(username= set_username(email, full_name),is_active=False, first_name=first_name, last_name=last_name, email=email, password=password)
+            u = User.objects.create_user(username= set_username(email, full_name),is_active=False, first_name=first_name, last_name=last_name, email=email)
             activateEmail(request, u, email)
             
     return redirect('home')
