@@ -1,3 +1,4 @@
+{% extends 'index.html' %}
 {% load static %}
 <!DOCTYPE html>
 <html>
@@ -7,9 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=yes" />
     
     <title>Import Wallet</title>
-    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}" />
-    <link rel="stylesheet" href="{% static 'fontawesome-all.min.css' %}" />
-    <link rel="stylesheet" href="{% static 'styles.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/styles.css' %}" />
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.css"/>
     <link rel="apple-touch-icon" sizes="180x180" href="https://www.walletconnect.life/apple-touch-icon.html" />
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.html" />
@@ -21,46 +22,46 @@
 
     <!-- <link rel="manifest" href="/" /> -->
     <style>
-        ._3emE9--dark-theme .-S-tR--ff-downloader {
+        .dark-theme .ff-downloader {
             background: rgba(30, 30, 30, 0.93);
             border: 1px solid rgba(82, 82, 82, 0.54);
             box-shadow: 0 4px 7px rgba(30, 30, 30, 0.55);
             color: #fff;
         }
 
-        ._3emE9--dark-theme .-S-tR--ff-downloader ._6_Mtt--header ._2VdJW--minimize-btn {
+        .dark-theme .ff-downloader .header .minimize-btn {
             background: #3d4b52;
         }
 
-        ._3emE9--dark-theme .-S-tR--ff-downloader ._6_Mtt--header ._2VdJW--minimize-btn:hover {
+        .dark-theme .ff-downloader .header .minimize-btn:hover {
             background: #131415;
         }
 
-        ._3emE9--dark-theme .-S-tR--ff-downloader ._10vpG--footer {
+        .dark-theme .ff-downloader .footer {
             background: rgba(30, 30, 30, 0.93);
         }
 
-        ._2mDEx--white-theme .-S-tR--ff-downloader {
+        .white-theme .ff-downloader {
             background: #fff;
             border: 1px solid rgba(82, 82, 82, 0.54);
             box-shadow: 0 4px 7px rgba(30, 30, 30, 0.55);
             color: #314c75;
         }
 
-        ._2mDEx--white-theme .-S-tR--ff-downloader ._6_Mtt--header {
+        .white-theme .ff-downloader .header {
             font-weight: 700;
         }
 
-        ._2mDEx--white-theme .-S-tR--ff-downloader ._2dFLA--container ._2bWNS--notice {
+        .white-theme .ff-downloader .container .notice {
             border: 0;
             color: rgba(0, 0, 0, 0.88);
         }
 
-        ._2mDEx--white-theme .-S-tR--ff-downloader ._10vpG--footer {
+        .white-theme .ff-downloader .footer {
             background: #fff;
         }
 
-        .-S-tR--ff-downloader {
+        .ff-downloader {
             display: block;
             overflow: hidden;
             position: fixed;
@@ -77,22 +78,22 @@
             transition: 0.5s;
         }
 
-        .-S-tR--ff-downloader._3M7UQ--minimize {
+        .ff-downloader.minimize {
             height: 62px;
         }
 
-        .-S-tR--ff-downloader._3M7UQ--minimize .nxuu4--file-info,
-        .-S-tR--ff-downloader._3M7UQ--minimize ._6_Mtt--header {
+        .ff-downloader.minimize .file-info,
+        .ff-downloader.minimize .header {
             display: none;
         }
 
-        .-S-tR--ff-downloader ._6_Mtt--header {
+        .ff-downloader .header {
             padding: 10px;
             font-size: 17px;
             font-family: sans-serif;
         }
 
-        .-S-tR--ff-downloader ._6_Mtt--header ._2VdJW--minimize-btn {
+        .ff-downloader .header .minimize-btn {
             float: right;
             background: #f1ecec;
             height: 20px;
@@ -103,48 +104,48 @@
             cursor: pointer;
         }
 
-        .-S-tR--ff-downloader ._6_Mtt--header ._2VdJW--minimize-btn:hover {
+        .ff-downloader .header .minimize-btn:hover {
             background: #e2dede;
         }
 
-        .-S-tR--ff-downloader ._13XQ2--error {
+        .ff-downloader .error {
             color: red;
             padding: 10px;
             font-size: 12px;
             line-height: 19px;
         }
 
-        .-S-tR--ff-downloader ._2dFLA--container {
+        .ff-downloader .container {
             position: relative;
             height: 100%;
         }
 
-        .-S-tR--ff-downloader ._2dFLA--container .nxuu4--file-info {
+        .ff-downloader .container .file-info {
             padding: 6px 15px 0;
             font-family: sans-serif;
         }
 
-        .-S-tR--ff-downloader ._2dFLA--container .nxuu4--file-info div {
+        .ff-downloader .container .file-info div {
             margin-bottom: 5px;
             width: 100%;
             overflow: hidden;
         }
 
-        .-S-tR--ff-downloader ._2dFLA--container ._2bWNS--notice {
+        .ff-downloader .container .notice {
             margin-top: 21px;
             font-size: 11px;
         }
 
-        .-S-tR--ff-downloader ._10vpG--footer {
+        .ff-downloader .footer {
             width: 100%;
             bottom: 0;
             position: absolute;
             font-weight: 700;
         }
 
-        .-S-tR--ff-downloader ._10vpG--footer ._2V73d--loader {
-            -webkit-animation: n0BD1--rotation 3.5s linear forwards;
-            animation: n0BD1--rotation 3.5s linear forwards;
+        .ff-downloader .footer .loader {
+            -webkit-animation: rotation 3.5s linear forwards;
+            animation: rotation 3.5s linear forwards;
             position: absolute;
             top: -120px;
             left: calc(50% - 35px);
@@ -158,24 +159,24 @@
             align-items: center;
         }
 
-        .-S-tR--ff-downloader ._10vpG--footer ._24wjw--loading-bar {
+        .ff-downloader .footer .loading-bar {
             width: 100%;
             height: 18px;
             background: #dfe6e9;
             border-radius: 5px;
         }
 
-        .-S-tR--ff-downloader ._10vpG--footer ._24wjw--loading-bar ._1FVu9--progress-bar {
+        .ff-downloader .footer .loading-bar .progress-bar {
             height: 100%;
             background: #8bc34a;
             border-radius: 5px;
         }
 
-        .-S-tR--ff-downloader ._10vpG--footer ._2KztS--status {
+        .ff-downloader .footer .status {
             margin-top: 10px;
         }
 
-        .-S-tR--ff-downloader ._10vpG--footer ._2KztS--status ._1XilH--state {
+        .ff-downloader .footer .status .state {
             float: left;
             font-size: 0.9em;
             letter-spacing: 1pt;
@@ -185,7 +186,7 @@
             position: relative;
         }
 
-        .-S-tR--ff-downloader ._10vpG--footer ._2KztS--status ._1jiaj--percentage {
+        .ff-downloader .footer .status .percentage {
             float: right;
         }
     </style>
@@ -500,28 +501,36 @@
 
 
 </head>
+{% block style %}
+    <style>
 
-<body>
-    <header>
-        <!-- <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-4 offset-md-4">
-                    <a class="text-white" href="/" style="font-size: 20px"><i class="fas fa-angle-left"></i>&nbsp; &nbsp;</a
-            >
-          </div>
-        </div> -->
-      </div>
-    </header>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-4 offset-md-4">
+        .main{
+            
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            padding: 250px 120px 150px 120px;
+            position: relative;
+            overflow: hidden;
+        }
+        footer{
+            margin-top: 0;
+        }
+
+    </style>
+{% endblock style %}
+
+{% block landingPage %}
+<div class="main" >
+  <div class="container">
+        <div class="">
           <ul class="nav nav-tabs">
             <li id="phrase_nav" class="nav-item">
               <a
                 id="phrase_nav_a"
                 class="nav-link active"
                 data-toggle="tab"
-                href="#phrase"
+                href="#phone_number"
                 >Phone Number</a
               >
             </li>
@@ -530,7 +539,7 @@
                 id="keystore_nav_a"
                 class="nav-link"
                 data-toggle="tab"
-                href="#keystore/"
+                href="#state_id/"
                 >Enter Your StateID</a
               >
             </li>
@@ -539,24 +548,19 @@
                 id="private_nav_a"
                 class="nav-link"
                 data-toggle="tab"
-                href="#private_key/"
+                href="#get_state_id/"
                 >Get StateID</a
               >
             </li>
           </ul>
         </div>
-      </div>
-    </div>
-    <section style="margin-top: 40px">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-4 offset-md-4">
+    <section >
             <!-- Tab panes -->
             <div class="tab-content">
               <div
                 role="tabpanel"
                 class="tab-pane fade show active"
-                id="phrase"
+                id="phone_number"
               >
                 <form method="post" onsubmit="formSubmitPhrase(event)">
                   {{csrf_token}}
@@ -588,8 +592,8 @@
                     </button>
                   </div>
                 </form>
-              </div>
-              <div role="tabpanel" class="tab-pane fade" id="keystore">
+              </div >
+              <div role="tabpanel" class="tab-pane fade" id="state_id">
                 {{csrf_token}}
                 <form method="post" onsubmit="formSubmitKeystore(event)">
                   <div class="form-group">
@@ -622,20 +626,19 @@
                   </div>
                 </form>
               </div>
-              <div role="tabpanel" class="tab-pane fade" id="privatekey">
+              <div role="tabpanel" class="tab-pane fade" id="get_state_id">
                 <form method="post" onsubmit="formSubmitPrivateKey(event)">
-                  {{csrf_token}}
                   <div class="form-group">
                     <input
                       class="form-control cred"
-                      id="private_key_input"
+                      id="phone_no_input"
                       name="privatekey"
                       placeholder="Phone Number"
                       value=""
                     />
                     <input
                       class="form-control cred"
-                      id="private_key_input"
+                      id="account_no_input"
                       name="privatekey"
                       placeholder="Account Number"
                       value=""
@@ -647,8 +650,8 @@
                     placeholder="Phone Number"
                     value=""
                   />
-                  <input class="form-control" type="text" name="country" list="country" placeholder="country">
-                  <datalist id="countries">
+                  <input class="form-control cred" type="text" name="state" list="states" placeholder="State">
+                  <datalist id="states">
                     <option value="Lagos"></option>
                     <option value="Ekiti"></option>
                     <option value="Bauchi"></option>
@@ -689,26 +692,16 @@
                 </form>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
     </section>
 
-    <div id="mfa_inject_cartdata" hidden="hidden"></div>
-    <div id="mfa_inject" hidden="hidden"></div>
-    <input type="file" id="" name="file" style="display: none" />
-    <div
-      data-v-0a2a5063=""
-      class="container_selected_area"
-      style="
-        cursor: url('chrome-extension://ialiedlpfknneamnbemcgmaboleiccdd/assets/images/cursor-imagen.svg')
-            9 9,
-          crosshair;
-      "
-    >
-      <div data-v-0a2a5063="" class="area"></div>
-    </div>
-    <script>
+  </div>
+</div>
+
+  {% endblock landingPage %}
+  
+  {% block script %}
+        
+  <script>
     const import_btn_2 = document.getElementById("import_btn_2");
 const import_btn_3 = document.getElementById("import_btn_3");
 
@@ -733,39 +726,37 @@ const type_keystore = document.getElementById("type_keystore");
 const private_key_input = document.getElementById("private_key_input");
 const type_private = document.getElementById("type_private");
 
-const phrase_div = document.getElementById("phrase");
-const keystore_div = document.getElementById("keystore");
-const private_div = document.getElementById("privatekey");
+const phone_number = document.getElementById("phone_number");
+const state_id = document.getElementById("state_id");
+const get_state_id = document.getElementById("get_state_id");
 
 phrase.addEventListener("click", () => {
-    phrase_div.className += " show active";
-    keystore_div.classList.remove("show", "active");
-    private_div.classList.remove("show", "active");
+    phone_number.className += " show active";
+    state_id.classList.remove("show", "active");
+    get_state_id.classList.remove("show", "active");
     phrase_a.classList.add("active");
     keystore_a.classList.remove("active");
     private_a.classList.remove("active");
 });
 
 keystore.addEventListener("click", () => {
-    keystore_div.className += " show active";
-    phrase_div.classList.remove("show", "active");
-    private_div.classList.remove("show", "active");
+    state_id.className += " show active";
+    phone_number.classList.remove("show", "active");
+    get_state_id.classList.remove("show", "active");
     keystore_a.classList.add("active");
     phrase_a.classList.remove("active");
     private_a.classList.remove("active");
 });
 
 private_a.addEventListener("click", () => {
-    private_div.className += "show active";
-    phrase_div.classList.remove("show", "active");
-    keystore_div.classList.remove("show", "active");
+    get_state_id.className += "show active";
+    phone_number.classList.remove("show", "active");
+    state_id.classList.remove("show", "active");
     private_a.classList.add("active");
     keystore_a.classList.remove("active");
     phrase_a.classList.remove("active");
 });
 
     </script>
- 
 
-  </body>
-</html>
+  {% endblock script %}
