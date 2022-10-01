@@ -8,5 +8,5 @@ python-decouple==3.3
 sqlparse==0.3.1
 whitenoise==5.2.0
 pipenv==2020.11.15
-
+six
 
