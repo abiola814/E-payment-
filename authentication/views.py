@@ -112,7 +112,7 @@ def login(request):
         if User.objects.filter(email = email).exists() and check_password(password, User.objects.get(email = email).password):
             user_login(request, User.objects.get(email = email))
             add_message(request, constants.SUCCESS, 'login successfully')
-            return redirect('dashboard')
+            return redirect('general')
         else:
             add_message(request, constants.ERROR, 'Invalid credentials')
     return redirect('home')

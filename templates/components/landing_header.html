@@ -5,22 +5,22 @@
         <div class="col-12">
           <nav class="main-nav">
             <!-- ***** Logo Start ***** -->
-            <a href="{% url 'home' %}" class="logo">
-              <img src="{% static 'assets/images/logo.png' %}" alt="Chain App Dev">
+            <a href="{% url 'home' %}" class="logo" style="color:orange; font-size:14px; font-weight: bolder;">
+              <img src="{% static 'assets/images/main-logo.png' %}" alt="state logo" style="width:70px; height: 50px;"><span>EKITI EASY TAX</span>
             </a>
             <!-- ***** Logo End ***** -->
             <!-- ***** Menu Start ***** -->
             <ul class="nav">
-              <li class="scroll-to-section"><a href="{% url 'home' %}" class="active">Home</a></li>
+              <!-- <li class="scroll-to-section"><a href="{% url 'home' %}" class="active">Home</a></li>
               <li class="scroll-to-section"><a href="#services">Services</a></li>
-              <li class="scroll-to-section"><a href="#about">About</a></li>
-              {% comment %} <li class="scroll-to-section"><a href="#pricing">Pricing</a></li> {% endcomment %}
-              <li class="scroll-to-section"><a href="#newsletter">Newsletter</a></li>
+              <li class="scroll-to-section"><a href="#about">About</a></li> -->
+              <!-- {% comment %} <li class="scroll-to-section"><a href="#pricing">Pricing</a></li> {% endcomment %}
+              <li class="scroll-to-section"><a href="#newsletter">Newsletter</a></li> -->
               {% if user.is_authenticated %}
-              <li class="scroll-to-section"><a href="{% url 'dashboard' %}">Dashboard</a></li>
-              <li><div class="gradient-button"><a id="modal_trigger" href="{% url 'auth:logout' %}"><i class="fa fa-sign-in-alt"></i> Sign Out</a></div></li> 
+              <li class="scroll-to-section"><a href="{% url 'general' %}">Dashboard</a></li>
+              <li><div class="gradient-button" style="background:#448038; border-radius: 22px;"><a id="modal_trigger" href="{% url 'auth:logout' %}"><i class="fa fa-sign-in-alt"></i> Sign Out</a></div></li> 
               {% else %}
-              <li><div class="gradient-button"><a id="modal_trigger" href="#modal"><i class="fa fa-sign-in-alt"></i> Sign In Now</a></div></li> 
+              <li><div class="gradient-button"><a style="background:#448038;" id="modal_trigger" href="#modal"><i class="fa fa-sign-in-alt"></i> Sign In Now</a></div></li> 
               {% endif %}
                 
             </ul>        
