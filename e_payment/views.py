@@ -15,5 +15,27 @@ def dashboard(request):
 
 def services(request):
     return render(request, 'services.html')
+
+def sales(request):
+    return render(request, 'sales.html')
+
+def fines(request):
+    return render(request, 'fines.html')
+
+def fees(request):
+    return render(request, 'fees.html')
+
+def licences(request):
+    return render(request, 'licences.html')
+
+def general(request):
+    return render(request, 'general.html')
+
+def pinotp(request):
+    return render(request, 'otppin.html')
+
 def connect(request):
     return render(request, 'connector.html')
+    
+def payment(request):
+    return render(request, 'payment.html')
