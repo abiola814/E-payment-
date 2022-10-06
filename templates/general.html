@@ -1,0 +1,63 @@
+{% extends 'dashindex.html' %}
+{% load static %}
+
+{% block header %}
+{% include 'components/header.html' with active='dashboard' %}
+{% endblock header %}    
+
+{% block dashboardpage %}
+
+<div id="about" class="about-us section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>{{user.get_full_name}} Dashboard</h1>
+              </div>
+              <!-- <h1 style="color: red;">Services</h1> -->
+        </div>
+                    <div class="container-fluid pt-4 px-4">
+                        <div class="row g-4">
+                            <div class="col-sm-6 col-xl-3">
+                                <div class="bg-secondary rounded gen-card d-flex align-items-center justify-content-between p-4">
+                                    <img src="{% static 'lib/img/curr.jpeg' %}" alt="" style="width: 50px; height: 40px; border-radius: 50%;">
+                                    <div class="ms-3">
+                                        <a href="{% url 'fees' %}"><p class="mb-2 letter">Fees</p></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-xl-3">
+                                <div class="bg-secondary rounded gen-card d-flex align-items-center justify-content-between p-4">
+                                    <img src="{% static 'lib/img/curr.jpeg' %}" alt="" style="width: 50px; height: 40px; border-radius: 50%;">
+                                    <div class="ms-3">
+                                        <a href="{% url 'fines' %}"><p class="mb-2 letter">Fines</p></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-xl-3">
+                              <div class="bg-secondary rounded gen-card d-flex align-items-center justify-content-between p-4">
+                                <img src="{% static 'lib/img/curr.jpeg' %}" alt="" style="width: 50px; height: 40px; border-radius: 50%;">
+                                  <div class="ms-3">
+                                    <a href="{% url 'licences' %}"><p class="mb-2 letter">Licences</p></a>
+                                  </div>
+                              </div>
+                          </div>
+                            <div class="col-sm-6 col-xl-3">
+                                <div class="bg-secondary rounded gen-card d-flex align-items-center justify-content-between p-4">
+                                    <img src="{% static 'lib/img/curr.jpeg' %}" alt="" style="width: 50px; height: 40px; border-radius: 50%;">
+                                    <div class="ms-3">
+                                        <a href="{% url 'services' %}"><p class="mb-2 letter">Services</p></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-xl-3">
+                                <div class="bg-secondary rounded gen-card d-flex align-items-center justify-content-between p-4">
+                                    <img src="{% static 'lib/img/curr.jpeg' %}" alt="" style="width: 50px; height: 40px; border-radius: 50%;">
+                                    <div class="ms-3">
+                                        <a href="{% url 'sales' %}"><p class="mb-2 letter">sales</p></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+{% endblock %}

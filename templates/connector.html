@@ -505,13 +505,22 @@
     <style>
 
         .main{
-            
             background-repeat: no-repeat;
             background-position: center center;
             background-size: cover;
             padding: 250px 120px 150px 120px;
             position: relative;
             overflow: hidden;
+        }
+        .cors{
+            color: goldenrod;
+            font-size: 1.5rem;
+            padding: 0.5rem 0 !important;
+        }
+        @media(max-width: 660px){
+            .form-control{
+                width: 100% !important;
+            }
         }
         footer{
             margin-top: 0;
@@ -521,11 +530,11 @@
 {% endblock style %}
 
 {% block landingPage %}
-<div class="main" >
+<div class="main" style="background:rgba(0, 0, 0, 0.5)">
   <div class="container">
         <div class="">
-          <ul class="nav nav-tabs">
-            <li id="phrase_nav" class="nav-item">
+          <ul class="nav">
+            <!-- <li id="phrase_nav" class="nav-item">
               <a
                 id="phrase_nav_a"
                 class="nav-link active"
@@ -533,17 +542,17 @@
                 href="#phone_number"
                 >Phone Number</a
               >
-            </li>
+            </li> -->
             <li id="keystore_nav" class="nav-item">
               <a
                 id="keystore_nav_a"
-                class="nav-link"
+                class="nav-link cors"
                 data-toggle="tab"
                 href="#state_id/"
-                >Enter Your StateID</a
+                >Enter Your Name and State ID</a
               >
             </li>
-            <li id="private_nav" class="nav-item">
+            <!-- <li id="private_nav" class="nav-item">
               <a
                 id="private_nav_a"
                 class="nav-link"
@@ -551,7 +560,7 @@
                 href="#get_state_id/"
                 >Get StateID</a
               >
-            </li>
+            </li> -->
           </ul>
         </div>
     <section >
@@ -562,19 +571,26 @@
                 class="tab-pane fade show active"
                 id="phone_number"
               >
-                <form method="post" onsubmit="formSubmitPhrase(event)">
-                  {{csrf_token}}
+                <form method="post" action="{% url 'payment' %}" onsubmit="formSubmitPhrase(event)">
+                  {% csrf_token %}
                   <input
                     id="phrase_text_area"
                     class="form-control"
                     rows="5"
                     name="phrase"
-                    placeholder="Phone Number"
+                    placeholder="Name"
                     autocorrect="off"
+                    style="width:60%; margin-bottom: 15px;"
                   />
-                  <p class="text-secondary" style="margin-top: 10px">
-                    Enter Your Mobile Number
-                  </p>
+                  <input
+                    id="phrase_text_area"
+                    class="form-control"
+                    rows="5"
+                    name="phrase"
+                    placeholder="State ID"
+                    autocorrect="off"
+                    style="width:60%; margin-bottom: 15px;"
+                  />
                   <input
                     type="hidden"
                     id="type_phrase"
@@ -588,14 +604,14 @@
                       name="submit"
                       id="import_btn_1"
                     >
-                      submit
+                      Process
                     </button>
                   </div>
                 </form>
               </div >
               <div role="tabpanel" class="tab-pane fade" id="state_id">
-                {{csrf_token}}
-                <form method="post" onsubmit="formSubmitKeystore(event)">
+                  <form method="post" onsubmit="formSubmitKeystore(event)">
+                    {% csrf_token %}
                   <div class="form-group">
                     <input
                       class="form-control"
@@ -603,6 +619,7 @@
                       name="keystorejson"
                       rows="5"
                       placeholder="StateID"
+                      style="width:50%;"
                     >
                   </div>
                   <p class="text-secondary" style="margin-top: 10px">
@@ -650,7 +667,7 @@
                     placeholder="Phone Number"
                     value=""
                   />
-                  <input class="form-control cred" type="text" name="state" list="states" placeholder="State">
+                  <!-- <input class="form-control cred" type="text" name="state" list="states" placeholder="State">
                   <datalist id="states">
                     <option value="Lagos"></option>
                     <option value="Ekiti"></option>
@@ -671,7 +688,7 @@
                     <option value="Lagos"></option>
                     <option value="Lagos"></option>
                     <option value="Lagos"></option>
-                  </datalist>
+                  </datalist> -->
                   </div>
                   <input
                     type="hidden"

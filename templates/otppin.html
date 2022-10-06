@@ -1,0 +1,17 @@
+{% load static %}
+{% block landingPage %}
+
+<div class="contaner all-over" style="padding-top:300px;" style="margin-left: 100px;">
+    <div class="row">
+        <div class="col-lg-6" style="display: flex; align-items: center; justify-content: center;">
+            <form action="{% url 'connector' %}" method="post">
+                {% csrf_token %}
+                <input type="text" name="otp" placeholder="One time password">
+                <input type="submit" placeholder="OTP" name="otp" style="background: #448038; padding: 5px 10px; border-radius: 7px; color:#fff; cursor: pointer;" >
+                <p style="color: black">Enter your 6 digit OTP number</p>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

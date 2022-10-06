@@ -1,33 +1,59 @@
-{% extends 'index.html' %}
+{% extends 'dashindex.html' %}
 {% load static %}
 
 {% block header %}
-{% include 'components/header.html' with active='dashboard' %}
+  {% include 'components/header.html' with active='dashboard' %}
 {% endblock header %}
 
-
-{% block style %}
-    <style>
-
-        .main-banner:after{
-            background-image: none;
-        }
-        footer{
-            margin-top: 0;
-        }
-
-    </style>
-{% endblock style %}
-    
-
-{% block landingPage %}
-<div class="main-banner wow fadeIn" id="top" data-wow-duration="1s" data-wow-delay="0.5s">
+{% block dashboardpage %}
+<!-- <div class="main-banner wow fadeIn" id="top" data-wow-duration="1s" data-wow-delay="0.5s">
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
-            <h1>{{user.get_full_name}} Dashboard</h1>
+            {% comment %}<h1>{{user.get_full_name}} Dashboard</h1>{% endcomment %}
           </div>
       </div>
     </div>
-  </div>
-{% endblock landingPage %}
+  </div> -->
+
+  <div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-sm-6 col-xl-3">
+            <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                <i class="fa fa-chart-line fa-3x text-primary"></i>
+                <div class="ms-3">
+                    <p class="mb-2">Today Sale</p>
+                    <h6 class="mb-0">$1234</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl-3">
+            <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                <i class="fa fa-chart-bar fa-3x text-primary"></i>
+                <div class="ms-3">
+                    <p class="mb-2">Total Sale</p>
+                    <h6 class="mb-0">$1234</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl-3">
+          <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+              <i class="fa fa-chart-area fa-3x text-primary"></i>
+              <div class="ms-3">
+                  <p class="mb-2">Today Revenue</p>
+                  <h6 class="mb-0">$1234</h6>
+              </div>
+          </div>
+      </div>
+        <div class="col-sm-6 col-xl-3">
+            <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                <i class="fa fa-chart-pie fa-3x text-primary"></i>
+                <div class="ms-3">
+                    <p class="mb-2">Total Revenue</p>
+                    <h6 class="mb-0">$1234</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock dashboardpage %}
