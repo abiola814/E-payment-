@@ -32,6 +32,11 @@
         return false;
     });
 
+    $('.sidebar-toggler-mobile').click(function () {
+        $('.sidebar, .content').removeClass("open");
+        return false;
+    });
+
 
     // Progress Bar
     $('.pg-bar').waypoint(function () {

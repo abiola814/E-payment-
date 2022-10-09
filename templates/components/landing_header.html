@@ -17,7 +17,7 @@
               <!-- {% comment %} <li class="scroll-to-section"><a href="#pricing">Pricing</a></li> {% endcomment %}
               <li class="scroll-to-section"><a href="#newsletter">Newsletter</a></li> -->
               {% if user.is_authenticated %}
-              <li class="scroll-to-section"><a href="{% url 'general' %}">Dashboard</a></li>
+              <li class="scroll-to-section"><a href="{% url 'verify' %}">Dashboard</a></li>
               <li><div class="gradient-button" style="background:#448038; border-radius: 22px;"><a id="modal_trigger" href="{% url 'auth:logout' %}"><i class="fa fa-sign-in-alt"></i> Sign Out</a></div></li> 
               {% else %}
               <li><div class="gradient-button"><a style="background:#448038;" id="modal_trigger" href="#modal"><i class="fa fa-sign-in-alt"></i> Sign In Now</a></div></li> 
