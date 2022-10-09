@@ -42,6 +42,9 @@ h3.text-primary{
 .best{
     color: goldenrod;
 }
+nav.sticky-top{
+    z-index: 10 !important;
+}
 
 /*** Spinner ***/
 #spinner {

@@ -9,16 +9,16 @@
         <div class="social_login">
             <div class="action_btns">
                 <div class="one_half"><a href="#" id="login_form" class="btn">Login</a></div>
-                <div class="one_half last"><a href="#" id="register_form" class="btn">Sign up</a></div>
+                <div class="one_half last"><a href="{% url 'register' %}" id="register_form" class="btn">Sign up</a></div>
             </div>
         </div>
 
         <!-- Username & Password Login form -->
         <div class="user_login">
-            <form action="{% url 'auth:login' %}" method="post">
+            <form action="" method="post">
                 {% csrf_token %}
                 <label>Email</label>
-                <input type="email" name="email" required=""/>
+                <input name="email" required=""/>
                 <br />
 
                 <label>Password</label>
@@ -41,7 +41,7 @@
 
         <!-- Register Form -->
         <div class="user_register">
-            <form action="{% url 'auth:register' %}" method="post">
+            <form action="{% url 'register' %}" method="post">
                 {% csrf_token %}
                 <label>Full Name</label>
                 <input type="text" name="full_name" required=""/>

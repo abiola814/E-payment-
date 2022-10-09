@@ -1,0 +1,28 @@
+{% extends 'index.html' %}
+{% load static %}
+
+
+{% block style %}
+    <style>
+        .main{
+            background: rgba(0,0,0,0.7);
+            height: 100vh;
+        }
+    </style>      
+{% endblock style %}
+
+{% block landingPage %}
+<div class="main d-flex align-items-center justify-content-center">
+    <div class="container">
+        <form action="#general" method="post" class="d-flex flex-column mb-5 p-4">
+            {% csrf_token %}
+            {{form}}
+            <!-- <input type="text" class="w-50 mb-3 form-control" name="Password" id="password" placeholder="Enter your password">
+            <input type="text" class="w-50 mb-3 form-control" name="c-Password" id="c-password" placeholder="Confirm your password">
+            <input type="number" class="w-50 mb-3 form-control" name="number" id="number" placeholder="Enter your phone number">
+            <input type="file" id="myFile" name="filename" class="mb-3 text-success"> -->
+            <input type="submit" class="w-25 btn btn-success" name="submit" id="submit" value="Submit">
+        </form>
+    </div>
+</div>
+{% endblock %}
