@@ -43,16 +43,29 @@
         <div class="user_register">
             <form action="{% url 'register' %}" method="post">
                 {% csrf_token %}
-                <label>Full Name</label>
-                <input type="text" name="full_name" required=""/>
+                <label>First Name</label>
+                <input type="text" name="first_name" required=""/>
+                <br />
+
+                <label>last Name</label>
+                <input type="text" name="last_name" required=""/>
                 <br />
 
                 <label>Email Address</label>
                 <input type="email" name="email" required=""/>
                 <br />
+
+                <label>Password</label>
+                <input type="password" name="password1" required=""/>
+                <br />
+
+                <label>Password</label>
+                <input type="password" name="password2" required=""/>
+                <br />
+
                 <div class="action_btns">
                     <div class="one_half"><a href="#" class="btn back_btn"><i class="fa fa-angle-double-left"></i> Back</a></div>
-                    <div class="one_half last"><button type="submit" href="#" class="btn btn_red">Register</button></div>
+                    <div class="one_half last"><button type="submit" href="" class="btn btn_red">Register</button></div>
                 </div>
             </form>
         </div>
