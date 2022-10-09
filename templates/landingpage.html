@@ -15,11 +15,11 @@
                   <h2 style="color:goldenrod;">Pay Your Levies with Ease</h2>
                   <div class="container" style="display:flex; margin-left: 10px;">
                     <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> -->
-                    <div><a id="modal_trigger" href="#modal" class="btn btn-outline-success">Register</a></div>
+                    <div><a id="modal_trigger" href="{% url 'register' %}" class="btn btn-outline-success">Register</a></div>
                     {% if user.is_authenticated %}
-                    <div><a class="btn btn-outline-success" id="modal_trigger" href="{% url 'auth:logout' %}"><i class="fa fa-sign-in-alt"></i> Log Out</a></div>
+                    <div><a class="btn btn-outline-success" id="modal_trigger" href="{% url 'logout' %}"><i class="fa fa-sign-in-alt"></i> Log Out</a></div>
                     {% else %}
-                    <div ><a class="btn btn-outline-success" style="color:#fff204;" id="modal_trigger" href="#modal"><i class="fa fa-sign-in-alt"></i> Log In</a></div>
+                    <div ><a class="btn btn-outline-success" style="color:#fff204;" id="modal_trigger" href="{% url 'login' %}"><i class="fa fa-sign-in-alt"></i> Log In</a></div>
                     {% endif %}
                   </div>
                     <!-- <p>Chain App Dev is an app landing page HTML5 template based on Bootstrap v5.1.3 CSS layout provided by TemplateMo, a great website to download free CSS templates.</p> -->
