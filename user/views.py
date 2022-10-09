@@ -1,5 +1,7 @@
 import email
 from django.shortcuts import render, redirect
+
+from user.models import Profile
 from . form import CustomUSerForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
@@ -9,18 +11,40 @@ def home(request):
 
 
 def registeruser(request):
-    form = CustomUSerForm()
+    # form = CustomUSerForm()
     if request.method == 'POST':
-        form = CustomUSerForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.username = user.email.lower()
+        username = request.POST['email'].lower()
+        email = request.POST['email'].lower()
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        password1 = request.POST['password1']
+        password2 = request.POST['password2']
+
+
+        # This can be rendered out as an error message
+        if password1 != password2:
+            print('invalid password match')
+
+        elif len(password1) < 8:
+            print('Try a stronger password')
+        
+        else:
+            user = User.objects.create_user(username=username, password=password1, first_name=first_name,last_name=last_name, email=email)
             user.save()
             login(request, user)
-            return redirect('landing')
+            # print("user created")
+
+# Makes a profile everytime a user is created
+            Profile.objects.create(
+                user = user,
+                full_name = first_name + " " + last_name,
+                email = email
+            )
+            # print('success')
+            return redirect('general')
           
-    context = {'form': form}
-    return render(request, 'user/verify.html', context)
+
+    return render(request, 'landingpage.html', )
 
 
 def loginPage(request):
@@ -28,7 +52,7 @@ def loginPage(request):
     # page = 'login'
 
     if request.user.is_authenticated:
-        return redirect('landing')
+        return redirect('home')
 
     if request.method == "POST":
         username = request.POST['email'].lower()
@@ -46,7 +70,7 @@ def loginPage(request):
         if user is not None:
             login(request, user)
             # print(username, password)
-            return redirect('landing')
+            return redirect('general')
 
 
         else:
@@ -61,3 +85,11 @@ def logoutuser(request):
     print('logging out')
     logout(request)
     return redirect('login')
+
+
+def dashboard(request):
+    return render(request, 'dashboard.html')
+
+
+def general(request):
+    return render(request, 'general.html')
