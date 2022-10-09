@@ -36,6 +36,9 @@ def pinotp(request):
 
 def connect(request):
     return render(request, 'connector.html')
+
+def verify(request):
+    return render(request, 'verify.html')
     
 def payment(request):
     return render(request, 'payment.html')

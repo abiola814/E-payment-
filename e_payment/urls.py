@@ -30,6 +30,7 @@ urlpatterns = [
     path('connect/', views.connect, name='connector'),
     path('payment/', views.payment, name='payment'),
     path('otppin/', views.pinotp, name='otp'),
+    path('verify/', views.verify, name='verify'),
     path('terms_and_condition/', views.terms_and_condition, name='terms'),
     path('authentication/', include('authentication.urls')),
     path('activate/<uidb64>/<token>',activate, name='activate'),
