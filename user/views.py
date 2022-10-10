@@ -19,6 +19,7 @@ def registeruser(request):
         last_name = request.POST['last_name']
         password1 = request.POST['password1']
         password2 = request.POST['password2']
+        profile_image = request.POST['filename']
 
 
         # This can be rendered out as an error message
@@ -29,18 +30,19 @@ def registeruser(request):
             print('Try a stronger password')
         
         else:
-            user = User.objects.create_user(username=username, password=password1, first_name=first_name,last_name=last_name, email=email)
+            user = User.objects.create_user(username=username, password=password1, first_name=first_name,last_name=last_name, email=email,)
             user.save()
             login(request, user)
-            # print("user created")
+            print("user created")
 
 # Makes a profile everytime a user is created
             Profile.objects.create(
                 user = user,
                 full_name = first_name + " " + last_name,
-                email = email
+                email = email,
+                profile_image = profile_image
             )
-            # print('success')
+            print('success')
             return redirect('general')
           
 
@@ -92,4 +94,5 @@ def dashboard(request):
 
 
 def general(request):
-    return render(request, 'general.html')
+    profile = request.user.profile
+    return render(request, 'general.html', {'profile': profile})
