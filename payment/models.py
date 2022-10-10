@@ -9,6 +9,8 @@ class Payment(models.Model):
     amount = models.PositiveIntegerField()
     email = models.EmailField()
     ref = models.CharField(max_length=200)
+    fee_type = models.CharField(max_length=200)
+    name = models.CharField(max_length=200)
     verified = models.BooleanField(default=False)
     date_created = models.DateTimeField(auto_now_add=True)
 
@@ -16,7 +18,7 @@ class Payment(models.Model):
         ordering = ("-date_created",)
 
     def __str__(self) -> str:
-        return f"{self.user.username} - {self.amount}"
+        return f"{self.amount}"
 
     def save(self, *args, **kwargs):
         while not self.ref:

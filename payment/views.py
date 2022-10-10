@@ -4,18 +4,19 @@ from django.http.response import HttpResponse
 from django.urls import reverse
 from django.contrib import messages
 from django.conf import settings
-from .forms import PaymentForm
 from .models import Payment
 
 def initiate_payment(request: HttpRequest) -> HttpResponse:
     if request.method == "POST":
-        payment_form = PaymentForm(request.POST)
-        if payment_form.is_valid():
-            payment: Payment = payment_form.save()
-            return render(request, '', {'payment': payment, 'paystack_public_key': settings.PAYSTACK_PUBLIC_KEY})
-    else:
-        payment_form = PaymentForm()
-    return render(request, "", {"payment_form": payment_form,},)
+        name= request.POST.get('name')
+        email = request.POST.get('email')
+        amount= 100
+        fee_type= request.POST.get('fee')
+        pay = Payment(name=name,email=email,amount=amount,fee_type=fee_type).save()
+        pays = Payment.objects.filter(email=email).last()
+        return render(request, 'payment.html', {'payment': pays, 'paystack_public_key': settings.PAYSTACK_PUBLIC_KEY})
+
+    return render(request, "connector.html")
 
 def verify_payment(request, ref: str):
     trxref = request.GET["trxref"]
@@ -27,9 +28,9 @@ def verify_payment(request, ref: str):
     payment: Payment = get_object_or_404(Payment, ref=ref)
     if payment.verify_payment():
         messages.success(
-            request, f"Payment Completed Successfully, GH₵ {payment.amount}."
+            request, f"Payment Completed Successfully, NGN #{payment.amount}."
         )
   
     else:
         messages.warning(request, "Sorry, your payment could not be confirmed.")
-    return redirect("")
+    return render(request, "connector.html")

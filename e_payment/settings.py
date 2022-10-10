@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'user.apps.UserConfig',
+    'payment',
 
 ]
 
@@ -140,6 +141,11 @@ EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = 465
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
+
+
+
+PAYSTACK_SECRET_KEY = 'sk_test_caa8f3383c28e100a27362a87b481d03fe49e434'
+PAYSTACK_PUBLIC_KEY = 'pk_test_2c3ee11abea710c598f4c80d9d3feaced804bd0e'
 
 COMPRESS_ENABLED = os.environ.get('COMPRESS_ENABLED', False)
 
