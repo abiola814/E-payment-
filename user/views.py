@@ -5,6 +5,42 @@ from user.models import Profile
 from . form import CustomUSerForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
+from django.template.loader import render_to_string
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_str
+from django.core.mail import EmailMessage
+from .email_token import account_activation_token
+from django.conf import settings
+from django.contrib.messages import add_message ,constants
+
+def activateEmail(request, user, to_email):
+
+    """
+    Get request.
+    send email to user for activation
+    :param request:
+    :param User object:
+    :param email
+    :return: mail
+    """
+    mail_subject = "Activate your user account."
+    message = render_to_string("activate_account.html", {
+        'user': user.username,
+        'domain': get_current_site(request).domain,
+        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+        'token': account_activation_token.make_token(user),
+        "protocol": 'https' if request.is_secure() else 'http'
+    })
+    print(user.username)
+    print(to_email)
+    email = EmailMessage(subject=mail_subject, body=message,from_email=settings.EMAIL_FROM_USER, to=[to_email])
+    if email.send(fail_silently = False):
+        add_message(request,constants.SUCCESS, f'Dear <b>{user}</b>, please go to you email <b>{to_email}</b> inbox and click on \
+                received activation link to confirm and complete the registration. <b>Note:</b> Check your spam folder.')
+    else:
+        add_message(request,constants.ERROR, f'Problem sending email to {to_email}, check if you typed it correctly.')
+
 
 def home(request):
     return render(request, 'landingpage.html')
@@ -31,8 +67,9 @@ def registeruser(request):
         
         else:
             user = User.objects.create_user(username=username, password=password1, first_name=first_name,last_name=last_name, email=email,)
+            user.is_active = False
             user.save()
-            login(request, user)
+            # login(request, user)
             print("user created")
 
 # Makes a profile everytime a user is created
@@ -42,7 +79,8 @@ def registeruser(request):
                 email = email,
                 profile_image = profile_image
             )
-            print('success')
+            # print('success')
+            activateEmail(request, user, email)
             return redirect('general')
           
 
@@ -50,15 +88,14 @@ def registeruser(request):
 
 
 def loginPage(request):
-
-    # page = 'login'
-
     if request.user.is_authenticated:
         return redirect('home')
 
     if request.method == "POST":
-        username = request.POST['email'].lower()
-        password = request.POST['password']
+        username = request.POST.get('email').lower()
+        password = request.POST.get('password')
+
+        print(username)
 
         try:
             user = User.objects.get(username = username)
@@ -70,15 +107,15 @@ def loginPage(request):
 
 
         if user is not None:
+            print(username, password)
             login(request, user)
-            # print(username, password)
             return redirect('general')
 
 
         else:
             print('something went wrong')
-            # print(username)
-            # print(password)
+            print(username)
+          
 
     return render(request, 'landingpage.html')
 
@@ -96,3 +133,28 @@ def dashboard(request):
 def general(request):
     profile = request.user.profile
     return render(request, 'general.html', {'profile': profile})
+
+
+def licences(request):
+    profile = request.user.profile
+    return render(request, 'licenses.html', {'profile': profile})
+
+
+def fines(request):
+    profile = request.user.profile
+    return render(request, 'fines.html', {'profile': profile})
+
+
+def fees(request):
+    profile = request.user.profile
+    return render(request, 'fees.html', {'profile': profile})
+
+
+def sales(request):
+    profile = request.user.profile
+    return render(request, 'sales.html', {'profile': profile})
+
+
+def services(request):
+    profile = request.user.profile
+    return render(request, 'services.html', {'profile': profile})

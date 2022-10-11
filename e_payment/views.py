@@ -1,4 +1,4 @@
-# from django.shortcuts import render
+from django.shortcuts import render
 
 
 # def home(request):
@@ -34,11 +34,11 @@
 # def pinotp(request):
 #     return render(request, 'otppin.html')
 
-# def connect(request):
-#     return render(request, 'connector.html')
+def connect(request):
+    return render(request, 'connector.html')
 
-# def verify(request):
-#     return render(request, 'verify.html')
+def verify(request):
+    return render(request, 'verify.html')
     
-# def payment(request):
-#     return render(request, 'payment.html')
+def payment(request):
+    return render(request, 'payment.html')

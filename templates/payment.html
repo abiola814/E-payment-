@@ -44,7 +44,9 @@
                         <label class="btn btn-outline-primary" for="btnradio1"><span class="pe-1">+</span>5949</label> 
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off"> 
                         <label class="btn btn-outline-primary" for="btnradio2"><span class="lpe-1">+</span>3894</label> 
-                    </div> </div> <form action="{% url 'otp' %}">
+                    </div> </div> 
+                    <form >
+                        <script src="https://js.paystack.co/v1/inline.js"></script>
                          <div class="row"> <div class="col-12"> <div class="d-flex flex-column px-md-5 px-4 mb-4"> <span>Credit Card</span> 
                         <div class="inputWithIcon"> 
                             <input class="form-control" type="text" placeholder="5136 1845 5468 3894"> 
@@ -75,7 +77,44 @@
                                                 <input class="form-control text-uppercase" type="text" placeholder="valdimir berezovkiy"><span class="far fa-user"></span>
                                              </div> </div> </div>  -->
                                     <div class="col-12 px-md-5 px-4 mt-3">
-                                        <button type="submit" class="btn btn-primary w-100">Pay $599.00</button> 
-        </div> </div> </form> </div> </div>
+                                        <button type="button" onclick="payWithPaystack()" class="btn btn-primary w-100">Pay NGN {{ payment.amount }}</button> 
+                                        <a href="{{ payment.get_delete_url }}" id="delete-payment" class="btn btn-danger">Delete</a>
+        </div> </div> 
+    </form> 
+</div> </div>
     </body>
+
+<script>
+    document.getElementById("delete-payment").addEventListener('click', (e) => {
+        if (!confirm("Are you sure you want to delete this payment!")) {
+            e.preventDefault();
+        }
+    });
+</script>
+<script>
+    function payWithPaystack() {
+        let currency = "NGN"
+        let plan = ""
+        let ref = "{{ payment.ref }}"
+        let obj = {
+            key: '{{ paystack_public_key }}',
+            email: '{{ payment.email }}',
+            amount: {{ payment.amount_value }},
+            ref:ref,    
+            callback: function (response) {
+                window.location.href = "{% url 'payments:verify-payment' payment.ref %}?amount={{ payment.amount_value }}&trxref=" + response.trxref
+            }
+        }      
+        
+        if(Boolean(currency)){
+            obj.currency = currency.toUpperCase()
+        }
+        if(Boolean(plan)){
+            obj.plan = plan
+        }
+        var handler = PaystackPop.setup(obj);
+        handler.openIframe();
+        console.log({currency,plan,ref})
+    }
+</script>
 </html>
