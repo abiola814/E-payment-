@@ -15,7 +15,7 @@
 
         <!-- Username & Password Login form -->
         <div class="user_login">
-            <form action="" method="post">
+            <form action="{% url 'login' %}" method="POST">
                 {% csrf_token %}
                 <label>Email</label>
                 <input name="email" required=""/>
@@ -41,7 +41,7 @@
 
         <!-- Register Form -->
         <div class="user_register">
-            <form action="{% url 'register' %}" method="post">
+            <form action="{% url 'register' %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <label>First Name</label>
                 <input type="text" name="first_name" required=""/>

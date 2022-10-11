@@ -117,13 +117,13 @@ def registeruser(request):
     return render(request, 'landingpage.html', )
 
 
-def loginPage(request):
-    if request.user.is_authenticated:
-        return redirect('home')
+def loginuser(request):
+    # if request.user.is_authenticated:
+    #     return redirect('home')
 
     if request.method == "POST":
-        username = request.POST.get('email').lower()
-        password = request.POST.get('password')
+        username = request.POST['email'].lower()
+        password = request.POST['password']
 
         print(username)
 
