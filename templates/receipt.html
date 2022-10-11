@@ -1,0 +1,53 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block style %}
+    <style>
+        .main{
+            padding-top: 200px;
+            background: rgba(0,0,0,0.7);
+            height: 200vh;
+            width: 100vw;
+        }
+        p{
+            color: goldenrod;
+            font-weight: bolder;
+            font-size: 20px;
+        }
+        .mini{
+            width: 50%;
+        }
+        @media(max-width: 600px){
+            .mini{
+                width: 100% !important;
+            }
+        }
+    </style>
+{% endblock %}
+
+{% block landingPage %}
+    <div class="main text-center">
+        <div class="container">
+            <div class="mini mb-3 d-flex align-items-start flex-row">
+                    <p class="col">Name : </p>
+                    <p class="col">Abdul Gafar</p>
+            </div>
+            <div class="mini mb-3 d-flex align-items-start flex-row">
+                <p class="col">StateID : </p>
+                <p class="col">123456675789</p>
+            </div>
+            <div class="mini mb-3 d-flex align-items-start flex-row">
+                <p class="col">References Number : </p>
+                <p class="col">BE1233FU322</p>
+            </div>
+            <div class="mini mb-3 d-flex align-items-start flex-row">
+                <p class="col">Service : </p>
+                <p class="col">Driver's Licences</p>
+            </div>
+            <div class="mini mb-3 d-flex align-items-start flex-row">
+                <p class="col">Date & Time : </p>
+                <p class="col">12-04-2022   10:15am</p>
+            </div>
+            <button class="btn btn-success">Get Receipts</button>
+        </div>
+    </div>
+{% endblock %}

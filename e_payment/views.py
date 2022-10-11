@@ -39,6 +39,12 @@ def connect(request):
 
 def verify(request):
     return render(request, 'verify.html')
+
+def transaction(request):
+    return render(request, 'transactions.html')
+
+def receipt(request):
+    return render(request, 'receipt.html')
     
 def payment(request):
     return render(request, 'payment.html')

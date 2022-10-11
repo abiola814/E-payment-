@@ -35,6 +35,7 @@ def activate(request, uidb64, token):
         user.is_active = True
         user.save()
         login(request, user)
+
         return redirect('general')
     else:
         add_message(request,constants.ERROR, "Activation link is invalid!")
@@ -172,7 +173,8 @@ def dashboard(request):
 
 
 def general(request):
-    return render(request, 'general.html',)
+    profile= Profile.objects.get(user=request.user)
+    return render(request, 'general.html',{'profile':profile})
 
 
 def licences(request):
