@@ -15,4 +15,5 @@ urlpatterns = [
         path('fines/', views.fines, name='fines'),
         path('services/', views.services, name='services'),
         path('activate/<uidb64>/<token>',views.activate, name='activate'),
+        path('connect/<str:fee>/', views.connect, name='connector'),
     ]

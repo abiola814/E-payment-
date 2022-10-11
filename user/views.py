@@ -177,7 +177,7 @@ def general(request):
 
 def licences(request):
 
-    return render(request, 'licenses.html',)
+    return render(request, 'licences.html',)
 
 
 def fines(request):
@@ -195,3 +195,7 @@ def sales(request):
 
 def services(request):
     return render(request, 'services.html')
+
+def connect(request,fee):
+    print(fee)
+    return render(request, 'connector.html',{'fee':fee})
