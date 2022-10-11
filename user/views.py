@@ -13,7 +13,8 @@ from django.core.mail import EmailMessage
 from .email_token import account_activation_token
 from django.conf import settings
 from django.contrib.messages import add_message ,constants
-
+from django.utils.html import strip_tags
+from django.core.mail import EmailMultiAlternatives
 def activate(request, uidb64, token):
     """
     Get request.
@@ -58,9 +59,17 @@ def activateEmail(request, user, to_email):
         'token': account_activation_token.make_token(user),
         "protocol": 'https' if request.is_secure() else 'http'
     })
+    plain_message = strip_tags(message)
     print(user.username)
     print(to_email)
-    email = EmailMessage(subject=mail_subject, body=message,from_email=settings.EMAIL_FROM_USER, to=[to_email])
+    # email = EmailMessage(subject=mail_subject, body=plain_message,from_email=settings.EMAIL_FROM_USER, to=[to_email])
+    email = EmailMultiAlternatives(
+     subject='Django HTML Email',
+       body="mail testing",
+        from_email=settings.EMAIL_FROM_USER,
+         to=[to_email]
+    )
+    email.attach_alternative(message, "text/html")
     if email.send(fail_silently = False):
         add_message(request,constants.SUCCESS, f'Dear <b>{user}</b>, please go to you email <b>{to_email}</b> inbox and click on \
                 received activation link to confirm and complete the registration. <b>Note:</b> Check your spam folder.')
