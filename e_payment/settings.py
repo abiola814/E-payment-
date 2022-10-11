@@ -145,7 +145,7 @@ EMAIL_USE_TLS = True
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_FROM_USER = "connecttechagency@gmail.com"
 
-EMAIL_USE_SSL = False
+EMAIL_USE_SSL = True
 
 EMAIL_HOST = 'smtp.gmail.com' 
 EMAIL_HOST_USER ="connecttechagency@gmail.com"
