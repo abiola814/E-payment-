@@ -55,7 +55,7 @@ def registeruser(request):
         last_name = request.POST['last_name']
         password1 = request.POST['password1']
         password2 = request.POST['password2']
-        profile_image = request.POST['filename']
+        profile_image = request.FILES.get('filename')
 
 
         # This can be rendered out as an error message
@@ -81,7 +81,7 @@ def registeruser(request):
             )
             # print('success')
             activateEmail(request, user, email)
-            return redirect('general')
+            return redirect('home')
           
 
     return render(request, 'landingpage.html', )
@@ -131,30 +131,24 @@ def dashboard(request):
 
 
 def general(request):
-    profile = request.user.profile
-    return render(request, 'general.html', {'profile': profile})
+    return render(request, 'general.html',)
 
 
 def licences(request):
-    profile = request.user.profile
-    return render(request, 'licenses.html', {'profile': profile})
+    return render(request, 'licenses.html',)
 
 
 def fines(request):
-    profile = request.user.profile
-    return render(request, 'fines.html', {'profile': profile})
+    return render(request, 'fines.html',)
 
 
 def fees(request):
-    profile = request.user.profile
-    return render(request, 'fees.html', {'profile': profile})
+    return render(request, 'fees.html')
 
 
 def sales(request):
-    profile = request.user.profile
-    return render(request, 'sales.html', {'profile': profile})
+    return render(request, 'sales.html')
 
 
 def services(request):
-    profile = request.user.profile
-    return render(request, 'services.html', {'profile': profile})
+    return render(request, 'services.html')
