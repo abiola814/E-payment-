@@ -14,6 +14,32 @@ from .email_token import account_activation_token
 from django.conf import settings
 from django.contrib.messages import add_message ,constants
 
+def activate(request, uidb64, token):
+    """
+    Get request.
+    activation of your account
+    :param request:
+    :param user uid:
+    :param token generated
+    :return: route
+    """
+
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except:
+        user = None
+
+    if user is not None and account_activation_token.check_token(user, token):
+        user.is_active = True
+        user.save()
+        login(request, user)
+        return redirect('general')
+    else:
+        add_message(request,constants.ERROR, "Activation link is invalid!")
+
+    return redirect('home')
+
 def activateEmail(request, user, to_email):
 
     """
@@ -84,11 +110,8 @@ def registeruser(request):
             )
             # print('success')
             activateEmail(request, user, email)
-<<<<<<< HEAD
-        return render(request, 'landingpage.html', )
-=======
             return redirect('home')
->>>>>>> 061cdd7d191135ecbbcfe041ff7d408e26dbef74
+
           
 
     return render(request, 'landingpage.html', )
@@ -144,19 +167,13 @@ def general(request):
 
 
 def licences(request):
-<<<<<<< HEAD
 
-=======
->>>>>>> 061cdd7d191135ecbbcfe041ff7d408e26dbef74
     return render(request, 'licenses.html',)
 
 
 def fines(request):
-<<<<<<< HEAD
     return render(request, 'fines.html')
-=======
-    return render(request, 'fines.html',)
->>>>>>> 061cdd7d191135ecbbcfe041ff7d408e26dbef74
+
 
 
 def fees(request):

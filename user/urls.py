@@ -14,5 +14,5 @@ urlpatterns = [
         path('fees/', views.fees, name='fees'),
         path('fines/', views.fines, name='fines'),
         path('services/', views.services, name='services'),
-        path('activate/<uidb64>/<token>',views.activateEmail, name='activate'),
+        path('activate/<uidb64>/<token>',views.activate, name='activate'),
     ]
