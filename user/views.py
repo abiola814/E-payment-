@@ -55,6 +55,7 @@ def registeruser(request):
         last_name = request.POST['last_name']
         password1 = request.POST['password1']
         password2 = request.POST['password2']
+        profile_image = request.POST['filename']
 
 
         # This can be rendered out as an error message
@@ -68,35 +69,36 @@ def registeruser(request):
             add_message(request,constants.ERROR, f'Try a stronger password')
         
         else:
-            user = User.objects.create_user(username=username, password=password1, first_name=first_name,last_name=last_name, email=email)
+            user = User.objects.create_user(username=username, password=password1, first_name=first_name,last_name=last_name, email=email,)
+            user.is_active = False
             user.save()
-            login(request, user)
-            # print("user created")
+            # login(request, user)
+            print("user created")
 
 # Makes a profile everytime a user is created
             Profile.objects.create(
                 user = user,
                 full_name = first_name + " " + last_name,
-                email = email
+                email = email,
+                profile_image = profile_image
             )
             # print('success')
             activateEmail(request, user, email)
-            return redirect('general')
+        return render(request, 'landingpage.html', )
           
 
     return render(request, 'landingpage.html', )
 
 
 def loginPage(request):
-
-    # page = 'login'
-
     if request.user.is_authenticated:
         return redirect('home')
 
     if request.method == "POST":
-        username = request.POST['email'].lower()
-        password = request.POST['password']
+        username = request.POST.get('email').lower()
+        password = request.POST.get('password')
+
+        print(username)
 
         try:
             user = User.objects.get(username = username)
@@ -110,15 +112,15 @@ def loginPage(request):
 
 
         if user is not None:
+            print(username, password)
             login(request, user)
-            # print(username, password)
             return redirect('general')
 
 
         else:
             print('something went wrong')
-            # print(username)
-            # print(password)
+            print(username)
+          
 
     return render(request, 'landingpage.html')
 
@@ -134,4 +136,26 @@ def dashboard(request):
 
 
 def general(request):
-    return render(request, 'general.html')
+    profile = request.user.profile
+    return render(request, 'general.html', {'profile': profile})
+
+
+def licences(request):
+
+    return render(request, 'licenses.html',)
+
+
+def fines(request):
+    return render(request, 'fines.html')
+
+
+def fees(request):
+    return render(request, 'fees.html')
+
+
+def sales(request):
+    return render(request, 'sales.html')
+
+
+def services(request):
+    return render(request, 'services.html')
