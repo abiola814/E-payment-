@@ -64,7 +64,7 @@ def activateEmail(request, user, to_email):
     print(to_email)
     # email = EmailMessage(subject=mail_subject, body=plain_message,from_email=settings.EMAIL_FROM_USER, to=[to_email])
     email = EmailMultiAlternatives(
-     subject='Django HTML Email',
+     subject='Easy-Pay',
        body="mail testing",
         from_email=settings.EMAIL_FROM_USER,
          to=[to_email]
