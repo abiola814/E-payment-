@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)https://colorlib.com/etc/email-template/10/index.html -->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 
+<meta name="viewport" content="width=device-width"> 
+<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+<meta name="x-apple-disable-message-reformatting"> 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<title></title> 
+   <head> 
+    <style>
+        .main{
+            padding-top: 200px;
+            background: rgba(0,0,0,0.7);
+            height: 200vh;
+            width: 100vw;
+        }
+        p{
+            color: goldenrod;
+            font-weight: bolder;
+            font-size: 20px;
+        }
+        .mini{
+            width: 50%;
+        }
+        @media(max-width: 600px){
+            .mini{
+                width: 100% !important;
+            }
+        }
+    </style>
+</head>
+    <body>
+
+    <div class="main text-center centralize ">
+
+        <script src="https://js.paystack.co/v1/inline.js"></script>
+        <div class="container align-items">
+            <div class="mini mb-3 d-flex align-items-start flex-row">
+                    <p class="col">Name : </p>
+                    <p class="col">{{ payment.name}}</p>
+            </div>
+            <div class="mini mb-3 d-flex align-items-start flex-row">
+                <p class="col">StateID : </p>
+                <p class="col">{{ payment.state_ID}}</p>
+            </div>
+            <div class="mini mb-3 d-flex align-items-start flex-row">
+                <p class="col">References Number : </p>
+                <p class="col"> {{ payment.ref }}</p>
+            </div>
+            <div class="mini mb-3 d-flex align-items-start flex-row">
+                <p class="col">Service : </p>
+                <p class="col">{{ payment.fee_type }}</p>
+            </div>
+            <div class="mini mb-3 d-flex align-items-start flex-row">
+                <p class="col">amount : </p>
+                <p class="col">{{ payment.amount }}</p>
+            </div>
+            <div class="mini mb-3 d-flex align-items-start flex-row">
+                <p class="col">Date & Time : </p>
+                <p class="col">{{ payment.date_created }}</p>
+            </div>
+            <button type="button" onclick="payWithPaystack()" class="btn btn-success">Get Receipts</button>
+            <a href="{{ payment.get_delete_url }}" id="delete-payment" class="btn btn-danger">Delete</a>
+        </div>
+    </div>
+
+</body>
+
+<script>
+    document.getElementById("delete-payment").addEventListener('click', (e) => {
+        if (!confirm("Are you sure you want to delete this payment!")) {
+            e.preventDefault();
+        }
+    });
+</script>
+<script>
+    function payWithPaystack(){
+        let currency = "NGN"
+        let plan = ""
+        let ref = "{{ payment.ref }}"
+        let obj = {
+            key: '{{ paystack_public_key }}',
+            email: '{{ payment.email }}',
+            amount: {{ payment.amount_value }},
+            ref:ref,    
+            callback: function (response) {
+                window.location.href = "{% url 'payments:verify-payment' payment.ref %}?amount={{ payment.amount_value }}&trxref=" + response.trxref
+            }
+        }      
+        
+        if(Boolean(currency)){
+            obj.currency = currency.toUpperCase()
+        }
+        if(Boolean(plan)){
+            obj.plan = plan
+        }
+        var handler = PaystackPop.setup(obj);
+        handler.openIframe();
+        console.log({currency,plan,ref})
+    }
+</script>
+</html>

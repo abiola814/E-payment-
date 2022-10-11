@@ -35,6 +35,7 @@ def activate(request, uidb64, token):
         user.is_active = True
         user.save()
         login(request, user)
+
         return redirect('general')
     else:
         add_message(request,constants.ERROR, "Activation link is invalid!")
@@ -64,7 +65,7 @@ def activateEmail(request, user, to_email):
     print(to_email)
     # email = EmailMessage(subject=mail_subject, body=plain_message,from_email=settings.EMAIL_FROM_USER, to=[to_email])
     email = EmailMultiAlternatives(
-     subject='Django HTML Email',
+     subject='Easy-Pay',
        body="mail testing",
         from_email=settings.EMAIL_FROM_USER,
          to=[to_email]
@@ -172,7 +173,8 @@ def dashboard(request):
 
 
 def general(request):
-    return render(request, 'general.html',)
+    profile= Profile.objects.get(user=request.user)
+    return render(request, 'general.html',{'profile':profile})
 
 
 def licences(request):
