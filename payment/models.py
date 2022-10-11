@@ -56,4 +56,4 @@ class StateID(models.Model):
         ordering = ("-date_created",)
 
     def __str__(self) -> str:
-        return f"{self.name}"
+        return f"{self.full_name}"
