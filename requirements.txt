@@ -10,3 +10,4 @@ whitenoise==5.2.0
 pipenv==2020.11.15
 six
 django-environ
+celery
