@@ -13,7 +13,9 @@ import os
 from pathlib import Path
 # from decouple import config
 import django_heroku
-import dj_database_url 
+import dj_database_url
+import socket
+socket.getaddrinfo('localhost', 8080)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -125,22 +127,29 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS=[ os.path.join(BASE_DIR,'static') ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+MEDIA_URL = ''
+MEDIA_ROOT = os.path.join(BASE_DIR / 'static/images')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # AUTH_USER_MODEL = 'authentication.User'
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_FROM_USER = '@gmail.com'
-
-EMAIL_HOST = 'smtp.gmail.com' 
-EMAIL_HOST_USER = '@gmail.com' 
-EMAIL_HOST_PASSWORD = '' 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_PORT = 465
 EMAIL_USE_TLS = False
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_FROM_USER = 'connecttechagency@gmail.com'
+
 EMAIL_USE_SSL = True
+EMAIL_FROM_USER = 'connecttechagency@gmail.com'
+
+EMAIL_HOST = 'smtp.gmail.com' 
+EMAIL_HOST_USER = 'connecttechagency@gmail.com' 
+EMAIL_HOST_PASSWORD = 'deqoyieutkpnmqbd'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
 
 
 

@@ -9,10 +9,11 @@ from .models import Payment
 def initiate_payment(request: HttpRequest) -> HttpResponse:
     if request.method == "POST":
         name= request.POST.get('name')
-        email = request.POST.get('email')
+        email = request.user.email
         amount= 100
         fee_type= request.POST.get('fee')
-        pay = Payment(name=name,email=email,amount=amount,fee_type=fee_type).save()
+        state_ID= request.POST.get('state')
+        pay = Payment(name=name,email=email,amount=amount,fee_type=fee_type,state_ID=state_ID).save()
         pays = Payment.objects.filter(email=email).last()
         return render(request, 'payment.html', {'payment': pays, 'paystack_public_key': settings.PAYSTACK_PUBLIC_KEY})
 

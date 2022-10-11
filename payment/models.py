@@ -11,6 +11,7 @@ class Payment(models.Model):
     ref = models.CharField(max_length=200)
     fee_type = models.CharField(max_length=200)
     name = models.CharField(max_length=200)
+    state_ID = models.CharField(max_length=200)
     verified = models.BooleanField(default=False)
     date_created = models.DateTimeField(auto_now_add=True)
 
@@ -22,7 +23,7 @@ class Payment(models.Model):
 
     def save(self, *args, **kwargs):
         while not self.ref:
-            ref = secrets.token_urlsafe(50)
+            ref = secrets.token_hex(50)
             object_with_similar_ref = Payment.objects.filter(ref=ref).first()
             if not object_with_similar_ref:
                 self.ref = ref

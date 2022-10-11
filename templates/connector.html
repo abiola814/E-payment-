@@ -586,17 +586,8 @@
                     id="phrase_text_area"
                     class="form-control"
                     rows="5"
-                    name="phrase"
+                    name="state"
                     placeholder="State ID"
-                    autocorrect="off"
-                    style="width:60%; margin-bottom: 15px;"
-                  />
-                  <input
-                    id="phrase_text_area"
-                    class="form-control"
-                    rows="5"
-                    name="email"
-                    placeholder="Email"
                     autocorrect="off"
                     style="width:60%; margin-bottom: 15px;"
                   />
@@ -604,7 +595,7 @@
                     type="hidden"
                     id="type_phrase"
                     name="fee"
-                    value="fees"
+                    value="{{ fee }}"
                   />
                   <div class="form-group">
                     <button

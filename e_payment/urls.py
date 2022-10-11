@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
-
+from django.conf import settings
+from django.conf.urls.static import static
 from . import views
 
 
@@ -16,7 +17,7 @@ urlpatterns = [
 #     path('fines/', views.fines, name='fines'),
 #     path('licences/', views.licences, name='licences'),
 #     path('general/', views.general, name='general'),
-    path('connect/', views.connect, name='connector'),
+    path('connect/<str:fee>/', views.connect, name='connector'),
     path('payment/', views.payment, name='payment'),
     path('verify/', views.verify, name='verify'),
     path('transaction/', views.transaction, name='transaction'),
@@ -28,4 +29,4 @@ urlpatterns = [
 ]
 
 
-# urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
