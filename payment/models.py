@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 import secrets
+
 from .paystack import PayStack
 # Create your models here.
 
@@ -43,3 +44,16 @@ class Payment(models.Model):
             self.save()
             return True
         return False
+
+class StateID(models.Model):
+    
+    full_name = models.CharField(max_length=200)
+    address = models.CharField(max_length=200)
+    identity = models.CharField(max_length=200)
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ("-date_created",)
+
+    def __str__(self) -> str:
+        return f"{self.name}"

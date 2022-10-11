@@ -530,6 +530,22 @@
 {% endblock style %}
 
 {% block landingPage %}
+
+  
+{% if messages %}
+    
+{% for message in messages %}
+<div class="custom-alert alert alert-info alert-dismissible fade show" role="alert">
+  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>
+  <div>
+  {{message}}
+  </div>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+{% endfor %}
+  
+{% endif %}
 <div class="main" style="background:rgba(0, 0, 0, 0.5)">
   <div class="container">
         <div class="">
