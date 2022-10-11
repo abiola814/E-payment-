@@ -13,9 +13,9 @@ def initiate_payment(request: HttpRequest) -> HttpResponse:
         amount= 100
         fee_type= request.POST.get('fee')
         state_ID= request.POST.get('state')
-        pay = Payment(name=name,email=email,amount=amount,fee_type=fee_type,state_ID=state_ID).save()
-        pays = Payment.objects.filter(email=email).last()
-        return render(request, 'payment.html', {'payment': pays, 'paystack_public_key': settings.PAYSTACK_PUBLIC_KEY})
+        pay = Payment.objects.create(name=name,email=email,amount=amount,fee_type=fee_type,state_ID=state_ID)
+        # pays = Payment.objects.get(ref=pay.ref)
+        return render(request, 'reciept.html', {'payment': pay, 'paystack_public_key': settings.PAYSTACK_PUBLIC_KEY})
 
     return render(request, "connector.html")
 
