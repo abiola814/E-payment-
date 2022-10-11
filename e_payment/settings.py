@@ -14,8 +14,11 @@ from pathlib import Path
 from decouple import config
 import django_heroku
 import dj_database_url
-import socket
-socket.getaddrinfo('localhost', 8080)
+import environ
+
+env = environ.Env()
+# reading .env file
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -140,21 +143,23 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_PORT = 465
 EMAIL_USE_TLS = False
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_FROM_USER = 'connecttechagency@gmail.com'
+EMAIL_FROM_USER = env("EMAIL_HOST_USER")
 
 EMAIL_USE_SSL = True
-EMAIL_FROM_USER = 'connecttechagency@gmail.com'
 
 EMAIL_HOST = 'smtp.gmail.com' 
-EMAIL_HOST_USER = 'connecttechagency@gmail.com' 
-EMAIL_HOST_PASSWORD = 'deqoyieutkpnmqbd'
+EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 # EMAIL_PORT = 587
 # EMAIL_USE_TLS = True
 
 
+SECRET_KEY = env("PAYSTACK_SECRET_KEY", default="unsafe-secret-key")
 
-PAYSTACK_SECRET_KEY = 'sk_test_caa8f3383c28e100a27362a87b481d03fe49e434'
-PAYSTACK_PUBLIC_KEY = 'pk_test_2c3ee11abea710c598f4c80d9d3feaced804bd0e'
+SECRET_KEY = env("PAYSTACK_SECRET_KEY", default="unsafe-secret-key")
+
+PAYSTACK_SECRET_KEY = env("PAYSTACK_SECRET_KEY")
+PAYSTACK_PUBLIC_KEY = env("PAYSTACK_PUBLIC_KEY")
 
 COMPRESS_ENABLED = os.environ.get('COMPRESS_ENABLED', False)
 
