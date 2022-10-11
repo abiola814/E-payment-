@@ -60,9 +60,12 @@ def registeruser(request):
         # This can be rendered out as an error message
         if password1 != password2:
             print('invalid password match')
+            add_message(request,constants.ERROR, f'invalid password matc')
+
 
         elif len(password1) < 8:
             print('Try a stronger password')
+            add_message(request,constants.ERROR, f'Try a stronger password')
         
         else:
             user = User.objects.create_user(username=username, password=password1, first_name=first_name,last_name=last_name, email=email)
@@ -100,6 +103,8 @@ def loginPage(request):
 
         except:
             print('user doest not exist')
+            add_message(request,constants.ERROR, f'user doest not exist')
+
 
         user = authenticate(username = username, password = password)
 
