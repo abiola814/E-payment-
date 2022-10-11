@@ -14,7 +14,7 @@ def initiate_payment(request: HttpRequest) -> HttpResponse:
         state_ID= request.POST.get('state')
         if StateID.objects.filter(identity=state_ID).exists():
             state=StateID.objects.get(identity=state_ID)
-            name= state.name
+            name= state.full_name
         else:
             messages.error(
                 request,
