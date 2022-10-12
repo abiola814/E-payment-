@@ -26,8 +26,8 @@
               {% comment %} <li class="scroll-to-section"><a href="#newsletter">Newsletter</a></li> {% endcomment %}
               
               {% if user.is_authenticated %}
-              <li class="scroll-to-section"><a href="{% url 'dashboard' %}" class="
-                {% if active == 'dashboard' %}
+              <li class="scroll-to-section"><a href="{% url 'general' %}" class="
+                {% if active == 'general' %}
                   active
                 {% endif %}
                   ">Dashboard</a></li>
