@@ -589,10 +589,10 @@
               >
                 <form method="post" action="{% url 'payments:initiate-payment' %}">
                   {% csrf_token %}
+                  {% if d %}
                   <input
                     id="phrase_text_area"
                     class="form-control"
-                    type="hidden"
 
                     rows="5"
                     name="name"
@@ -600,6 +600,17 @@
                     autocorrect="off"
                     style="width:60%; margin-bottom: 15px;"
                   />
+                  <input
+                  id="phrase_text_area"
+                  class="form-control"
+
+                  rows="5"
+                  name="place"
+                  placeholder="state of resident"
+                  autocorrect="off"
+                  style="width:60%; margin-bottom: 15px;"
+                />
+                  {% endif%}
                   <input
                     id="phrase_text_area"
                     class="form-control"
