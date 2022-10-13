@@ -3,12 +3,99 @@
 
 {% block header %}
 {% include 'components/header.html' with active='dashboard' %}
-{% endblock header %}    
+{% endblock header %}   
 
+{% block style %}
+    <style>
+        .overlay{
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        .main{
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+        .main > div{
+            background: rgba(0,0,0,0.7);
+            width: 200vw;
+            height: 200vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* transform: scale(0); */
+            transition: all 1s ease;
+        }
+        .main > div > div{
+            text-align: center;
+            max-width: 90vw;
+            max-height: 100vh;
+            /* opacity: 0; */
+            transition: opacity 1s ease;
+            background: white;
+            padding: 40px 70px;
+            border-radius: 10px;
+        }
+        .inbox{
+            position: fixed;
+            right: 0;
+            padding-top: 110px;
+            padding-right: 15px;
+            z-index: 100;
+            cursor: pointer;
+        }
+        .fa-solid{
+            cursor: pointer;
+            font-size: 25px;
+            color: #fff;
+        }
+        .inbox a{
+            color: goldenrod;
+        }
+        .toggler{
+            position: absolute;
+            width: 100px;
+            height: 50px;
+            cursor: pointer;
+            opacity: 0;
+            z-index: 110;
+        }
+        .active{
+            opacity: 1;
+        }
+    </style>
+{% endblock %}
 {% block dashboardpage %}
 
-    <div id="about" class="about-us section">
-        <div class="container">
+<div class="overlay">
+    <div onclick="this.parentNode.style.display = 'none';"aria-disabled="false" role="button" tabindex="0" class="inbox" title="Close" aria-label="Close"><span data-testid="x-viewer" data-icon="x-viewer" class=""><svg viewBox="0 0 24 24" width="24" height="24" class=""><path fill="currentColor" d="m19.8 5.8-1.6-1.6-6.2 6.2-6.2-6.2-1.6 1.6 6.2 6.2-6.2 6.2 1.6 1.6 6.2-6.2 6.2 6.2 1.6-1.6-6.2-6.2 6.2-6.2z"></path></svg></span></div>
+    <div class="main">
+        <div>
+            <div>
+                <div>
+                    <p style="color: goldenrod;">Do you have a State ID?</p>
+                </div>
+                <div class="in">
+                    <a href="{% url 'connector' fee='Traffic Fines' %}" class="btn btn-success">Yes</a>
+                    <a href="{% url 'flexible' %}" class="btn btn-success">No</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="about" class="about-us section">
+    <div class="container">
                   <h1>Fines</h1>
                   <div class="row">
                     <div class="col-lg-4">
@@ -24,7 +111,7 @@
                                     <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
                                                      <img src="{% static 'lib/img/curr.jpeg' %}" alt="" style="width: 50px; height: 40px; border-radius: 50%;">
                                         <div class="ms-3">
-                                            <a href="{% url 'connector' fee='Fines and Penalties' %}" class="lette"><p class="mb-2">Fines/Penalties</p>
+                                            <a href="{% url 'connector' fee='Fines or Penalties' %}" class="lette"><p class="mb-2">Fines/Penalties</p>
                                             </a>
                                         </div>
                                     </div>
@@ -47,6 +134,25 @@
                                       </div>
                                   </div>
                               </div>
+                              <div class="col-sm-6 col-xl-3">
+                                <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                                                  <img src="{% static 'lib/img/curr.jpeg' %}" alt="" style="width: 50px; height: 40px; border-radius: 50%;">
+                                    <div class="ms-3">
+                                        <!-- <input type="submit" class="toggler active"/><p class="lette mb-2">Traffic Fines</p> -->
+                                        <a href="" class="lette but"><p class="mb-2">Traffic Fines</p></a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6 col-xl-3">
+                                <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                                                  <img src="{% static 'lib/img/curr.jpeg' %}" alt="" style="width: 50px; height: 40px; border-radius: 50%;">
+                                    <div class="ms-3">
+                                        <!-- <input type="submit" class="toggler active"/><p class="lette mb-2">Traffic Fines</p> -->
+                                        <a href="" class="lette but"><p class="mb-2">Emergency health care fees</p></a>
+                                    </div>
+                                </div>
+                            </div>
                                 <!-- <div class="col-sm-6 col-xl-3">
                                     <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
                                         <i class="fa fa-chart-pie fa-3x text-primary"></i>
@@ -61,3 +167,13 @@
     <div class="clear"></div>
 
 {% endblock %}
+
+{% block script %}
+    <script>
+        document.querySelector('.but').addEventListener('click',function(e){
+            console.log('clicked');
+            document.querySelector('.overlay').classList.toggle('active');
+        });
+    </script>
+
+{% endblock script%}

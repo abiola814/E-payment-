@@ -17,13 +17,9 @@
         <div class="user_login">
             <form action="{% url 'login' %}" method="POST">
                 {% csrf_token %}
-                <label>Email</label>
-                <input name="email" required=""/>
-                <br />
-
-                <label>Password</label>
-                <input type="password" name="password" required=""/>
-                <br />
+                <input type="text" class="mb-3" name="email" required="" placeholder="Email Address"/>
+                
+                <input type="password" class="mb-3" name="password" required="" placeholder="Password"/>
 
                 <div class="checkbox">
                     <input id="remember" type="checkbox" />
@@ -43,29 +39,16 @@
         <div class="user_register">
             <form action="{% url 'register' %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-                <label>First Name</label>
-                <input type="text" name="first_name" required=""/>
-                <br />
-
-                <label>last Name</label>
-                <input type="text" name="last_name" required=""/>
-                <br />
-
-                <label>Email Address</label>
-                <input type="email" name="email" required=""/>
-                <br />
                 
-                <label>Profile Image</label>
-                <input type="file" id="myFile" name="filename" class="mb-3 text-success">
-                <br>
-                
-                <label>Password</label>
-                <input type="password" name="password1" required=""/>
-                <br />
+                <input type="text" name="first_name" class="mb-4" required="" placeholder="Your Fullname"/>
 
-                <label>Confirm Password</label>
-                <input type="password" name="password2" required=""/>
-                <br />
+                <input type="email" name="email" class="mb-4" required="" placeholder="Your Email Address"/>
+                
+                <input type="file" id="myFile" name="filename" class="mb-4 text-success">
+                
+                <input type="password" name="password1" class="mb-4" required="" placeholder="Password"/>
+
+                <input type="password" name="password2" class="mb-4" required="" placeholder="Confirm Password"/>
 
                 <div class="action_btns">
                     <div class="one_half"><a href="#" class="btn back_btn"><i class="fa fa-angle-double-left"></i> Back</a></div>

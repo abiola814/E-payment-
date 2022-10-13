@@ -26,6 +26,9 @@
     <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
     <link href="{% static 'lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css' %}" rel="stylesheet" />
 
+    <!--font-awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{% static 'lib/css/bootstrap.min.css' %}" rel="stylesheet">
 
@@ -254,7 +257,8 @@
 <script src="{% static 'lib/tempusdominus/js/moment.min.js' %}"></script>
 <script src="{% static 'lib/tempusdominus/js/moment-timezone.min.js' %}"></script>
 <script src="{% static 'lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js' %}"></script>
-
+{% block script %}
+{% endblock %}
 <!-- Template Javascript -->
 <script src="{% static 'lib/js/main.js' %}"></script>
 </body>
