@@ -4,15 +4,24 @@ from django.http.response import HttpResponse
 from django.urls import reverse
 from django.contrib import messages
 from django.conf import settings
-from .models import Payment
+from .models import Payment,StateID
 
 def initiate_payment(request: HttpRequest) -> HttpResponse:
     if request.method == "POST":
-        name= request.POST.get('name')
         email = request.user.email
         amount= 100
         fee_type= request.POST.get('fee')
         state_ID= request.POST.get('state')
+        if StateID.objects.filter(identity=state_ID).exists():
+            state=StateID.objects.get(identity=state_ID)
+            name= state.full_name
+        else:
+            messages.error(
+                request,
+                "please check again state id does not exist",
+            )
+            return render(request, "connector.html")
+
         pay = Payment.objects.create(name=name,email=email,amount=amount,fee_type=fee_type,state_ID=state_ID)
         # pays = Payment.objects.get(ref=pay.ref)
         return render(request, 'reciept.html', {'payment': pay, 'paystack_public_key': settings.PAYSTACK_PUBLIC_KEY})

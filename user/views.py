@@ -201,4 +201,8 @@ def services(request):
 
 def connect(request,fee):
     print(fee)
-    return render(request, 'connector.html',{'fee':fee})
+    d=False
+    if str(fee) == 'Illegal Trading' or 'Administrative Charges' or 'Fines and Penalties':
+        d=True
+        print('opo')
+    return render(request, 'connector.html',{'fee':fee,'d':d})

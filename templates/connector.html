@@ -530,6 +530,22 @@
 {% endblock style %}
 
 {% block landingPage %}
+
+  
+{% if messages %}
+    
+{% for message in messages %}
+<div class="custom-alert alert alert-info alert-dismissible fade show" role="alert">
+  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>
+  <div>
+  {{message}}
+  </div>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+{% endfor %}
+  
+{% endif %}
 <div class="main" style="background:rgba(0, 0, 0, 0.5)">
   <div class="container">
         <div class="">
@@ -573,9 +589,11 @@
               >
                 <form method="post" action="{% url 'payments:initiate-payment' %}">
                   {% csrf_token %}
+                  {% if d %}
                   <input
                     id="phrase_text_area"
                     class="form-control"
+
                     rows="5"
                     name="name"
                     placeholder="Name"
@@ -583,6 +601,17 @@
                     style="width:60%; margin-bottom: 15px;"
                   />
                   <label for="state" class="nav-link cors">State ID</label>
+                  <input
+                  id="phrase_text_area"
+                  class="form-control"
+
+                  rows="5"
+                  name="place"
+                  placeholder="state of resident"
+                  autocorrect="off"
+                  style="width:60%; margin-bottom: 15px;"
+                />
+                  {% endif%}
                   <input
                     id="phrase_text_area"
                     class="form-control"
