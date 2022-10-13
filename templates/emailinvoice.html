@@ -1,0 +1,25 @@
+<div style="background-color: rgb(228, 228, 228);">
+    <div style="margin: 20px; background-color: #fff;">
+
+Hi {{ user }},
+<br>
+
+Your payment with order id: {{orderid}} has been paid successfully.
+
+Your order consists of payment for {{fee}} <br>
+<hr>
+<b>Total:<span>&#8358;</span>{{amount}}</b>
+
+{% if 'Licences' in fee %}
+Order will reach to you in 5-7 days.
+{%else%}
+We have attached the document for your order with this mail.
+{% endif %}
+
+Lifting Ekiti!
+
+Sincerely,
+Ekiti Pay
+
+    </div>
+</div>
