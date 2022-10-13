@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+{}
+{% load static %}
+<head>
+  <title>Invoice WonderShop</title>
+<style>
+  .clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+a {
+  text-decoration: underline;
+}
+
+body {
+  position: relative;
+  margin: 0 auto; 
+  color: #001028;
+  background: #FFFFFF; 
+  font-family: Arial, sans-serif; 
+  font-size: 14px; 
+  font-family: Arial;
+}
+
+header {
+  padding: 10px 0;
+  margin-bottom: 30px;
+}
+
+#logo {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+#logo img {
+  width: 90px;
+}
+
+h1 {
+  
+  color: #5D6975;
+  font-size: 2.4em;
+  line-height: 1.4em;
+  font-weight: normal;
+  text-align: center;
+  margin: 0 0 20px 0;
+}
+
+#project {
+  float: left;
+}
+
+#project span {
+  color: #5D6975;
+  text-align: right;
+  width: 52px;
+  margin-right: 10px;
+  display: inline-block;
+  font-size: 14px;
+}
+
+#company {
+  float: right;
+  text-align: right;
+}
+
+#project div,
+#company div {
+  white-space: nowrap;        
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-bottom: 20px;
+}
+
+
+
+table th,
+table td {
+  text-align: center;
+}
+
+table th {
+  
+  
+  color: #5D6975;
+  border-bottom: 1px solid #C1CED9;
+  white-space: nowrap;        
+  font-weight: normal;
+}
+
+table .service,
+table .desc {
+  text-align: left;
+}
+
+table td {
+ padding-top:5px;
+ padding-bottom:5px;
+  
+}
+
+table tr {
+  border-bottom: 1px solid #C1CED9;
+}
+
+table td.service,
+table td.desc {
+  vertical-align: top;
+}
+
+table td.unit,
+table td.qty,
+table td.total {
+  font-size: 1.2em;
+}
+
+table td.grand {
+  border-top: 1px solid #5D6975;;
+}
+
+#notices .notice {
+  color: #5D6975;
+  font-size: 1.2em;
+}
+
+footer {
+  color: #5D6975;
+  width: 100%;
+  height: 30px;
+  position: absolute;
+  bottom: 0;
+  border-top: 1px solid #C1CED9;
+  padding: 8px 0;
+  text-align: center;
+}
+
+
+  </style>
+</head>
+
+<body>
+  <header class="clearfix">
+    <div id="logo" style="display:flex; justify-content:center; align-items:center;">
+      <!-- <img src="{% static 'assets/images/white-logo.png' %}" class="brand-logo" width=60 height=60> not working -->
+      <!-- <img src="{% static 'assets/images/white-logo.png' %}" class="brand-logo" height="200px"> not working -->
+      <img src="C:\Users\AYATOO\Documents\E-payment-\static\assets\images\main-logo.png" class="brand-logo" width=60 height=60>
+      <h1 class="brand-name">EKITI PAY</h1>
+    </div>
+    <h1>{{fee}} DOCUMENT</h1>
+    <div id="company" class="clearfix">
+      <div>EKITI PAY</div>
+      <div><a href="mailto:company@example.com">ekiti@example.com</a></div>
+      <div><a href="www.ekitipay.in:8000">www.EPAY.in:8000</a></div>
+    </div>
+    <div id="project">
+      <div><span>CLIENT:</span> {{name}}</div>
+      <div><span>CLIENT:</span> {{STATE_ID}}</div>
+      <div><span>EMAIL:</span> <a href="mailto:{{user_email}}">{{user_email}}</a></div>
+      <div><span>DATE:</span> {{date}}</div>
+      <div><span>TRANSACTION ID:</span> {{order_id}}</div>
+    </div>
+    <br>
+    <br>
+  </header>
+    <div class="table-container" style="overflow-x:auto">
+      <table class="table" style="width:100%">
+          <thead>
+              <tr>
+                  <th scope="col">PRODUCT</th>
+                  <th scope="col">QUANTITY</th>
+                  <th scope="col">PRICE</th>
+              </tr>
+          </thead>
+              <tr>
+                  <td scope="row">{{fee}}</td>
+                  <td>TOTAL: </td>
+                  <td><span>&#8358;</span>{{amount}}</td>
+                  
+              </tr>
+          </tbody>
+      </table>
+      {% if 'Licences' in fee %}
+      <p>This document is authenticated by Ekiti State Government and will be used for collection of your Licence in the specified time</p>
+      {%else%}
+      <p>This document is authenticated by Ekiti State Government and can be used with relevant parastaters</p>
+      {% endif %}
+    </div>
+    <p style="text-align:right; font-size:12px;">*All values are in NAIRA<p>
+</body>
+
+</html>
