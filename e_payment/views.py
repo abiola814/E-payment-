@@ -37,6 +37,9 @@ from django.shortcuts import render
 def connect(request):
     return render(request, 'connector.html')
 
+def flexible(request):
+    return render(request, 'flexibleform.html')
+
 def verify(request):
     return render(request, 'verify.html')
 
