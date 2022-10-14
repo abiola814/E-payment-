@@ -154,8 +154,8 @@ EMAIL_HOST_USER="connecttechagency@gmail.com"
 # EMAIL_HOST_USER ="differencereal6@gmail.com"
 # EMAIL_HOST_PASSWORD = ""
 
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 
 PAYSTACK_SECRET_KEY = env("PAYSTACK_SECRET_KEY")
