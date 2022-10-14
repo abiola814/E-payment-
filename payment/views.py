@@ -75,16 +75,18 @@ def verify_payment(request, ref: str):
             'amount': payment.amount,
             'stateid' : payment.state_ID,
         })
+        to_email = ['government1.irs@gmail.com', request.user.email]
         context_dict = {
             'user': request.user.profile.full_name,
             'orderid': payment.ref,
             'amount': payment.amount,
             'fee': payment.fee_type,
             'stateid' : payment.state_ID,
+            'to_email' : to_email
         }
         template = get_template('emailinvoice.html')
         message  = template.render(context_dict)
-        to_email = ['ajibadeyinusa2012@gmail.com', request.user.email]
+        
   
 
         # I use this loop because I dont want the two parties to see each other's email

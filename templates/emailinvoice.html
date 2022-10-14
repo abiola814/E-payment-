@@ -10,12 +10,10 @@ Your order consists of payment for {{fee}} <br>
 <hr>
 <b>Total:<span>&#8358;</span>{{amount}}</b>
 
-    {% if email.to == request.user.email %}
-        {% if 'icence' in fee %}
-        Order will reach to you in 5-7 days.
-        {%else%}
-        We have attached the document for your order with this mail.
-        {% endif %}
+    {% if 'icence' in fee %}
+    Order will reach to you in 5-7 days.
+    {%else%}
+    We have attached the document for your order with this mail.
     {% endif %}
 
 Lifting Ekiti!

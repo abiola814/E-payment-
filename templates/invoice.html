@@ -186,13 +186,13 @@ footer {
               </tr>
           </tbody>
       </table>
-      {% if email.to == request.user.email %}
+
+
         {% if 'icence' in fee %}
         <p>This document is authenticated by Ekiti State Government and will be used for collection of your Licence in the specified time</p>
         {%else%}
         <p>This document is authenticated by Ekiti State Government and can be used with relevant parastaters</p>
         {% endif %}
-      {% endif %}
 
 
     </div>
