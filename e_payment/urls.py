@@ -22,6 +22,7 @@ urlpatterns = [
     path('verify/', views.verify, name='verify'),
     path('transaction/', views.transaction, name='transaction'),
     path('receipt/', views.receipt, name='receipt'),
+    path('flexible/', views.flexible, name='flexible'),
 #     path('otppin/', views.pinotp, name='otp'),
 #     path('terms_and_condition/', views.terms_and_condition, name='terms'),
 #     path('authentication/', include('authentication.urls')),

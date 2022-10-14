@@ -146,20 +146,22 @@ EMAIL_USE_TLS = False
 EMAIL_FROM_USER = "connecttechagency@gmail.com"
 
 EMAIL_USE_SSL = True
-
 EMAIL_HOST = 'smtp.gmail.com' 
 EMAIL_HOST_USER ="oladunjoye1998@gmail.com"
-EMAIL_HOST_PASSWORD = "jabjsmxisjgpdzhp"
+EMAIL_HOST_PASSWORD = ""
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER ="connecttechagency@gmail.com"
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 
 # EMAIL_HOST_USER ="differencereal6@gmail.com"
 # EMAIL_HOST_PASSWORD = ""
-
 # EMAIL_PORT = 587
 # EMAIL_USE_TLS = True
 
 
-PAYSTACK_SECRET_KEY = env("PAYSTACK_SECRET_KEY")
-PAYSTACK_PUBLIC_KEY = env("PAYSTACK_PUBLIC_KEY")
+PAYSTACK_SECRET_KEY = "sk_test_caa8f3383c28e100a27362a87b481d03fe49e434"
+PAYSTACK_PUBLIC_KEY = "pk_test_2c3ee11abea710c598f4c80d9d3feaced804bd0e"
 
 COMPRESS_ENABLED = os.environ.get('COMPRESS_ENABLED', False)
 
