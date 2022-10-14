@@ -148,11 +148,11 @@ EMAIL_FROM_USER = "connecttechagency@gmail.com"
 EMAIL_USE_SSL = True
 
 EMAIL_HOST = 'smtp.gmail.com' 
-# EMAIL_HOST_USER="connecttechagency@gmail.com"
+EMAIL_HOST_USER="connecttechagency@gmail.com"
 # EMAIL_HOST_PASSWORD =env("EMAIL_HOST_PASSWORD")
 
-EMAIL_HOST_USER ="differencereal6@gmail.com"
-EMAIL_HOST_PASSWORD = "gnaiaaxhhqsskdrt"
+# EMAIL_HOST_USER ="differencereal6@gmail.com"
+# EMAIL_HOST_PASSWORD = ""
 
 # EMAIL_PORT = 587
 # EMAIL_USE_TLS = True
