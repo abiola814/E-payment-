@@ -29,13 +29,13 @@ def initiate_payment(request: HttpRequest) -> HttpResponse:
                 request,
                 "please check again state id does not exist",
             )
-            return render(request, "connector.html")
+            return render(request, "connector.html",{'fee':fee_type})
 
         pay = Payment.objects.create(name=name,email=email,amount=amount,fee_type=fee_type,state_ID=state_ID)
         # pays = Payment.objects.get(ref=pay.ref)
         return render(request, 'reciept.html', {'payment': pay, 'paystack_public_key': settings.PAYSTACK_PUBLIC_KEY})
 
-    return render(request, "connector.html")
+    return render(request, "connector.html",{'fee':fee_type})
 
 def verify_payment(request, ref: str):
     trxref = request.GET["trxref"]

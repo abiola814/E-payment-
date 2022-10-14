@@ -87,8 +87,7 @@ def registeruser(request):
     if request.method == 'POST':
         username = request.POST['email'].lower()
         email = request.POST['email'].lower()
-        first_name = request.POST['first_name']
-        last_name = request.POST['last_name']
+        first_name = request.POST['first_name'].split()
         password1 = request.POST['password1']
         password2 = request.POST['password2']
         profile_image = request.FILES.get('filename')
@@ -97,7 +96,7 @@ def registeruser(request):
         # This can be rendered out as an error message
         if password1 != password2:
             print('invalid password match')
-            add_message(request,constants.ERROR, f'invalid password matc')
+            add_message(request,constants.ERROR, f'invalid password match')
 
 
         elif len(password1) < 8:
@@ -105,16 +104,17 @@ def registeruser(request):
             add_message(request,constants.ERROR, f'Try a stronger password')
         
         else:
-            user = User.objects.create_user(username=username, password=password1, first_name=first_name,last_name=last_name, email=email,)
+            user = User.objects.create_user(username=username, password=password1, first_name=first_name, email=email,)
             user.is_active = False
             user.save()
             # login(request, user)
             print("user created")
+            add_message(request,constants.SUCCESS, f'Registeration successful, check your email for verification')
 
 # Makes a profile everytime a user is created
             Profile.objects.create(
                 user = user,
-                full_name = first_name + " " + last_name,
+                first_name = first_name,
                 email = email,
                 profile_image = profile_image
             )
@@ -172,8 +172,9 @@ def dashboard(request):
 
 
 def general(request):
-    profile= Profile.objects.get(user=request.user)
-    return render(request, 'general.html',{'profile':profile})
+    # profile= Profile.objects.get(user=request.user)
+    return render(request, 'general.html')
+    # return render(request, 'general.html',{'profile':profile})
 
 
 def licences(request):
@@ -200,7 +201,6 @@ def services(request):
 def connect(request,fee):
     print(fee)
     d=False
-    if str(fee) == 'Illegal Trading' or 'Administrative Charges' or 'Fines and Penalties':
+    if str(fee) == 'Illegal Trading':
         d=True
-        print('opo')
     return render(request, 'connector.html',{'fee':fee,'d':d})

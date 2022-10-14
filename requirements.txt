@@ -12,3 +12,4 @@ six
 django-environ
 celery
 requests
+xhtml2pdf
