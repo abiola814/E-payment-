@@ -146,6 +146,9 @@ EMAIL_USE_TLS = False
 EMAIL_FROM_USER = "connecttechagency@gmail.com"
 
 EMAIL_USE_SSL = True
+EMAIL_HOST = 'smtp.gmail.com' 
+EMAIL_HOST_USER ="oladunjoye1998@gmail.com"
+EMAIL_HOST_PASSWORD = ""
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER ="connecttechagency@gmail.com"
