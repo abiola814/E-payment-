@@ -149,7 +149,6 @@ def loginuser(request):
 
 
         if user is not None:
-            print(username, password)
             login(request, user)
             return redirect('general')
 

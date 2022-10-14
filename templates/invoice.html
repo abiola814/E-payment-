@@ -161,7 +161,7 @@ footer {
     </div>
     <div id="project">
       <div><span>CLIENT:</span> {{name}}</div>
-      <div><span>CLIENT:</span> {{STATE_ID}}</div>
+      <div><span>STATE ID:</span> {{STATE_ID}}</div>
       <div><span>EMAIL:</span> <a href="mailto:{{user_email}}">{{user_email}}</a></div>
       <div><span>DATE:</span> {{date}}</div>
       <div><span>TRANSACTION ID:</span> {{order_id}}</div>
@@ -186,11 +186,15 @@ footer {
               </tr>
           </tbody>
       </table>
-      {% if 'Licences' in fee %}
-      <p>This document is authenticated by Ekiti State Government and will be used for collection of your Licence in the specified time</p>
-      {%else%}
-      <p>This document is authenticated by Ekiti State Government and can be used with relevant parastaters</p>
+      {% if email.to == request.user.email %}
+        {% if 'icence' in fee %}
+        <p>This document is authenticated by Ekiti State Government and will be used for collection of your Licence in the specified time</p>
+        {%else%}
+        <p>This document is authenticated by Ekiti State Government and can be used with relevant parastaters</p>
+        {% endif %}
       {% endif %}
+
+
     </div>
     <p style="text-align:right; font-size:12px;">*All values are in NAIRA<p>
 </body>
