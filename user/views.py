@@ -87,7 +87,7 @@ def registeruser(request):
     if request.method == 'POST':
         username = request.POST['email'].lower()
         email = request.POST['email'].lower()
-        first_name = request.POST['first_name'].split()
+        first_name = request.POST['first_name']
         password1 = request.POST['password1']
         password2 = request.POST['password2']
         profile_image = request.FILES.get('filename')
@@ -114,7 +114,7 @@ def registeruser(request):
 # Makes a profile everytime a user is created
             Profile.objects.create(
                 user = user,
-                full_name = first_name,
+                full_name = str(first_name),
                 email = email,
                 profile_image = profile_image
             )
