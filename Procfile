@@ -1,1 +1,1 @@
-web: gunicorn e_payment.wsgi
+web: python manage.py migrate && gunicorn e_payment.wsgi
