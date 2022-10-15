@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 from pathlib import Path
 # from decouple import config
-import django_heroku
 import dj_database_url
 import environ
 
@@ -158,5 +157,4 @@ PAYSTACK_PUBLIC_KEY = env("PAYSTACK_PUBLIC_KEY")
 
 COMPRESS_ENABLED = os.environ.get('COMPRESS_ENABLED', False)
 
-django_heroku.settings(locals())
 
