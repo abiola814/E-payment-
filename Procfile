@@ -1,1 +1,1 @@
-web: gunicorn e_payment.wsgi
+web: gunicorn e_payment.wsgi --log-file-
