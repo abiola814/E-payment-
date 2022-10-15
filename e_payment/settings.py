@@ -140,22 +140,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # AUTH_USER_MODEL = 'authentication.User'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_PORT = 465
-# EMAIL_USE_TLS = False
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_FROM_USER = "connecttechagency@gmail.com"
-
-# EMAIL_USE_SSL = True
-EMAIL_HOST = 'smtp.gmail.com' 
-# EMAIL_HOST_USER ="oladunjoye1998@gmail.com"
-# EMAIL_HOST_PASSWORD = ""
 
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER ="connecttechagency@gmail.com"
+
+EMAIL_PORT = 587
+
+EMAIL_USE_TSL=True
+
+EMAIL_HOST_USER ="differencereal6@gmail.com"
+
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 
-EMAIL_PORT=587
-EMAIL_USE_TLS=True
 
 
 PAYSTACK_SECRET_KEY = env("PAYSTACK_SECRET_KEY")
