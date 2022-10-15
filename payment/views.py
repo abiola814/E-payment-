@@ -87,7 +87,6 @@ def verify_payment(request, ref: str):
         template = get_template('emailinvoice.html')
         message  = template.render(context_dict)
         
-  
 
         # I use this loop because I dont want the two parties to see each other's email
         for email in to_email:
