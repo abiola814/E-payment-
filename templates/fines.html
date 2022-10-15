@@ -8,6 +8,7 @@
 {% block style %}
     <style>
         .overlay{
+            display:none;                                                                                            
             position: fixed;
             top: 0;
             left: 0;
@@ -71,15 +72,18 @@
             opacity: 0;
             z-index: 110;
         }
-        .active{
-            opacity: 1;
+       .overlay.active{
+        display: block;
+       }
+        .btn{
+            cursor: pointer;
         }
     </style>
 {% endblock %}
 {% block dashboardpage %}
 
-<div class="overlay" d>
-    <div onclick="this.parentNode.style.display = 'none';"aria-disabled="false" role="button" tabindex="0" class="inbox" title="Close" aria-label="Close"><span data-testid="x-viewer" data-icon="x-viewer" class=""><svg viewBox="0 0 24 24" width="24" height="24" class=""><path fill="currentColor" d="m19.8 5.8-1.6-1.6-6.2 6.2-6.2-6.2-1.6 1.6 6.2 6.2-6.2 6.2 1.6 1.6 6.2-6.2 6.2 6.2 1.6-1.6-6.2-6.2 6.2-6.2z"></path></svg></span></div>
+<div class="overlay">
+    <div aria-disabled="false" role="button" tabindex="0" class="inbox" title="Close" aria-label="Close"><span data-testid="x-viewer" data-icon="x-viewer" class=""><svg viewBox="0 0 24 24" width="24" height="24" class=""><path fill="currentColor" d="m19.8 5.8-1.6-1.6-6.2 6.2-6.2-6.2-1.6 1.6 6.2 6.2-6.2 6.2 1.6 1.6 6.2-6.2 6.2 6.2 1.6-1.6-6.2-6.2 6.2-6.2z"></path></svg></span></div>
     <div class="main">
         <div>
             <div>
@@ -128,7 +132,7 @@
                                 </div>
                                 <div class="col-sm-6 col-xl-3">
                                   <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                                                    <img src="{% static 'lib/img/curr.jpeg' %}" alt="" style="width: 50px; height: 40px; border-radius: 50%;">
+                                        <img src="{% static 'lib/img/curr.jpeg' %}" alt="" style="width: 50px; height: 40px; border-radius: 50%;">
                                       <div class="ms-3">
                                           <a href="{% url 'connector' fee='Administrative Charges' %}" class="lette"><p class="mb-2">Administrative Charges</p>
                                           </a>
@@ -140,7 +144,7 @@
                                                   <img src="{% static 'lib/img/curr.jpeg' %}" alt="" style="width: 50px; height: 40px; border-radius: 50%;">
                                     <div class="ms-3">
                                         <!-- <input type="submit" class="toggler active"/><p class="lette mb-2">Traffic Fines</p> -->
-                                        <a href="" class="lette but"><p class="mb-2">Traffic Fines</p></a>
+                                        <a href="#" class="lette but"><p class="mb-2">Traffic Fines</p></a>
                                     </div>
                                 </div>
                             </div>
@@ -150,7 +154,7 @@
                                                   <img src="{% static 'lib/img/curr.jpeg' %}" alt="" style="width: 50px; height: 40px; border-radius: 50%;">
                                     <div class="ms-3">
                                         <!-- <input type="submit" class="toggler active"/><p class="lette mb-2">Traffic Fines</p> -->
-                                        <a href="" class="lette but"><p class="mb-2">Emergency health care fees</p></a>
+                                        <a href="#" class="lette but"><p class="mb-2">Emergency health care fees</p></a>
                                     </div>
                                 </div>
                             </div>
@@ -170,6 +174,20 @@
 {% endblock %}
 
 {% block script %}
+    <script>
+        document.querySelectorAll('.but').forEach(el =>{
+            el.addEventListener('click',function(e){
+            console.log('clicked');
+            document.querySelector('.overlay').classList.add('active');
+          })
+        });
 
+        const close_btn = document.querySelector('div[aria-label="Close"]')
+        close_btn.addEventListener('click', (e) => {
+            e.currentTarget.parentElement.classList.remove('active');
+            console.log(e.currentTarget.parentElement)
+        })
+        console.log(close_btn)
+    </script>
 
 {% endblock script%}
