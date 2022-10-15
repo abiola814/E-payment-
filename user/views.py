@@ -114,7 +114,7 @@ def registeruser(request):
 # Makes a profile everytime a user is created
             Profile.objects.create(
                 user = user,
-                first_name = first_name,
+                full_name = first_name,
                 email = email,
                 profile_image = profile_image
             )
@@ -149,7 +149,6 @@ def loginuser(request):
 
 
         if user is not None:
-            print(username, password)
             login(request, user)
             return redirect('general')
 

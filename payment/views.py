@@ -67,41 +67,39 @@ def verify_payment(request, ref: str):
         pdf = result.getvalue()
         filename = 'Value_' + data['fee'] + '.pdf'
 
-        mail_subject = 'Recent Order Details'
+        mail_subject = 'Trascation File'
         message = render_to_string('emailinvoice.html', {
             'orderid': payment.ref,
              'name': payment.name,
             'fee': payment.fee_type,
             'amount': payment.amount,
+            'stateid' : payment.state_ID,
         })
+        to_email = ['government1.irs@gmail.com', request.user.email]
         context_dict = {
             'user': request.user.profile.full_name,
             'orderid': payment.ref,
             'amount': payment.amount,
             'fee': payment.fee_type,
+            'stateid' : payment.state_ID,
+            'to_email' : to_email
         }
         template = get_template('emailinvoice.html')
         message  = template.render(context_dict)
-        to_email = request.user.email
-        # email = EmailMessage(
-        #     mail_subject,
-        #     message, 
-        #     settings.EMAIL_HOST_USER,
-        #     [to_email]
-        # )
+        
 
-        # for including css(only inline css works) in mail and remove autoescape off
-        email = EmailMultiAlternatives(
-            subject='Trascation File',
-            body='This is your document',
-      # necessary to pass some message here
-            from_email =settings.EMAIL_HOST_USER,
-            to = [to_email]
-        )
-        email.attach_alternative(message, "text/html")
-        email.attach(filename, pdf, 'application/pdf')
-        email.send(fail_silently=False)
-        print('success')
+        # I use this loop because I dont want the two parties to see each other's email
+        for email in to_email:
+            email = EmailMultiAlternatives(
+                subject=mail_subject,
+                body='This is your document',
+                from_email =settings.EMAIL_HOST_USER,
+                to = [email]
+            )
+            email.attach_alternative(message, "text/html")
+            email.attach(filename, pdf, 'application/pdf')
+            email.send(fail_silently=False)
+            print('success')
   
     else:
         messages.warning(request, "Sorry, your payment could not be confirmed.")
