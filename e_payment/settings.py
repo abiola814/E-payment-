@@ -148,7 +148,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TSL=True
 
 EMAIL_HOST_USER ="differencereal6@gmail.com"
-
+EMAIL_FROM_USER = "differencereal6@gmail.com"
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 
 
