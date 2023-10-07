@@ -9,6 +9,6 @@ sqlparse==0.3.1
 whitenoise==5.2.0
 six
 django-environ
-celery==5.3.0
+celery==5.2.7
 requests
 xhtml2pdf
