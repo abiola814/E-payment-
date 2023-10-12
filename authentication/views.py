@@ -138,7 +138,7 @@ def register(request):
             add_message(request, constants.ERROR, 'Email already in use')
             return redirect('home')
         else:
-            u = User.objects.create_user(username= set_username(email, full_name),is_active=False, first_name=first_name, last_name=last_name, email=email)
+            u = User.objects.create_user(username= set_username(email, full_name),is_active=True, first_name=first_name, last_name=last_name, email=email)
             #activateEmail(request, u, email)
             
     return redirect('home')
