@@ -139,6 +139,6 @@ def register(request):
             return redirect('home')
         else:
             u = User.objects.create_user(username= set_username(email, full_name),is_active=False, first_name=first_name, last_name=last_name, email=email)
-            activateEmail(request, u, email)
+            #activateEmail(request, u, email)
             
     return redirect('home')
