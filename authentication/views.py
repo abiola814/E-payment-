@@ -65,7 +65,7 @@ def passwordEmail(request, user, to_email,password):
     print(user.username)
     print(to_email)
     email = EmailMessage(subject=mail_subject, body=message,from_email=settings.EMAIL_FROM_USER, to=[to_email])
-    if email.send(fail_silently = False):
+    if email.send(fail_silently = True):
         pass
     else:
         print('did not send')
