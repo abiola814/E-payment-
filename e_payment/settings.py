@@ -125,7 +125,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
+
 STATICFILES_STORAGE="whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 MEDIA_URL = '/media/'
@@ -147,11 +149,12 @@ EMAIL_USE_TLS=True
 
 EMAIL_HOST_USER ="oladunjoye1998@gmail.com"
 EMAIL_FROM_USER = "oladunjoye1998@gmail.com"
-EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+# EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 
 
 
-PAYSTACK_SECRET_KEY = env("PAYSTACK_SECRET_KEY")
-PAYSTACK_PUBLIC_KEY = env("PAYSTACK_PUBLIC_KEY")
+PAYSTACK_SECRET_KEY = 1234
+PAYSTACK_PUBLIC_KEY =1234
 
-COMPRESS_ENABLED = os.environ.get('COMPRESS_ENABLED', False)
+# COMPRESS_ENABLED = os.environ.get('COMPRESS_ENABLED', False)
+COMPRESS_ENABLED = os.environ.get('COMPRESS_ENABLED', 'False').lower() == 'true'

@@ -2,13 +2,13 @@
 :root {
     --primary: goldenrod;
     --secondary: #448038;
-    --light: #6C7293;
+    --light: #fff;
     --dark: rgb(0,0,0,0.4);
-    --image: url(../img/main.jpeg) no-repeat center;
-    --white: #cecece;
+    /* --image: url(../img/main.jpeg) no-repeat center; */
+    --white: #fff;
 }
 body{
-    background: var(--image);
+    background: var(--white)
 }
 .back-to-top {
     position: fixed;

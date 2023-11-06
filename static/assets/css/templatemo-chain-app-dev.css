@@ -142,13 +142,13 @@ global styles
 */
 html,
 body {
-  background: url('../images/main.jpeg') no-repeat center;
+  /* background: url('../images/main.jpeg') no-repeat center; */
   font-family: 'Roboto', sans-serif;
   height: 150vh;
 }
 
 .main-banner{
-  background: rgba(0,0,0,0.8);
+  /* background: rgba(0,0,0,0.8); */
   height: 100%;
 }
 
